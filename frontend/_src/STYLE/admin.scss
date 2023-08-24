@@ -1,0 +1,396 @@
+@import 'mixins';
+
+
+.admin{
+  width: 100%;
+  height: 100%;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-areas: 'nav nav' 'side content';
+  grid-template-rows: 80px 1fr;
+  grid-template-columns: 490px 1fr;
+  &__control{
+    &.active{
+      display: flex;
+    }
+    & table{
+      width: 100%;
+      min-width: fit-content;
+      overflow-x: auto;
+      gap: 22px;
+      display: flex;
+      margin-top: 30px;
+      flex-direction: column;
+    }
+    & td{
+      padding: 5px;
+      color: var(--main-color);
+      word-break: break-all;
+      background-color: #fff;
+      border-collapse: collapse;
+      border-radius: 8px;
+      border: 2px solid #fa8c8c;
+    }
+    & thead, tr, tbody{
+      border-radius: 12px;
+    }
+    & tbody{
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    & tr{
+      display: grid;
+      grid-template-rows: 1fr;
+      max-width: 1px;
+      grid-auto-flow: column;
+      grid-auto-columns: 250px;
+      column-gap: 2px;
+    }
+
+    flex-direction: column;
+    display: none;
+    width: 100%;
+    height: 100%;
+    padding: 70px 40px;
+    &_start{
+      &.active{
+        display: flex;
+      }
+      display: none;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      &>h2{
+        font-size: 45px;
+        text-align: center;
+      }
+    }
+    &_title{
+      font-size: 26px;
+    }
+  }
+  &__name{
+    font-size: 20px;
+    line-height: 24px;
+    text-transform: uppercase;
+  }
+  &__logout{
+    background: linear-gradient(var(--btn_grad));
+    border-radius: 28px;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    color: #f8f3f3;
+    transition: .5s all ease-in-out;
+    gap: 10px;
+    align-items: center;
+    letter-spacing: 3.5px;
+    font-size: 14px;
+    min-width: unset;
+    padding: 16px 26px;
+  }
+  &__nav{
+    grid-area: nav;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 0 40px;
+  }
+  &__side{
+    grid-area: side;
+    background: linear-gradient(98.29deg, #F487A8 44.19%, #F6ABA4 96.21%);
+    display: flex;
+    padding: 32px;
+    gap: 60px;
+    flex-direction: column;
+    overflow-y: auto;
+    &_inner{
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      width: 100%;
+      height: fit-content;
+    }
+    &_item{
+      font-size: 20px;
+      line-height: 24px;
+      text-align: center;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      padding: 12px;
+      background-color: #EEDED9;
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 12px;
+    }
+    &_ul{
+      &.active{
+        display: flex;
+      }
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      align-items: flex-end;
+      height: fit-content;
+      gap: 18px;
+    }
+    &_li{
+      width: 80%;
+      padding: 10px;
+      background-color: #EEDED9;
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 18px;
+      font-size: 18px;
+      line-height: 22px;
+      text-align: center;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      &:after{
+        content: "";
+        position: absolute;
+        top: calc(50% - 15px);
+        z-index: 10;
+        background-color: #EEDED9;
+        left: -60px;
+        width: 28px;
+        height: 28px;
+        border-radius: 100%;
+      }
+    }
+  }
+  &__content{
+    grid-area: content;
+    background-color: #FBF2F2;
+  }
+  &__login{
+    &.active{
+      display: flex;
+    }
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: #FBF2F2;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &_label{
+      width: 100%;
+      background-color: transparent;
+      &>input{
+        @include cabinet_input;
+        background-color: transparent;
+      }
+    }
+    &_title{
+      text-align: center;
+      letter-spacing: -0.01em;
+      color: var(--main-color);
+      font-weight: 700;
+      font-size: 55px;
+      line-height: 120%;
+    }
+    &_form{
+      display: flex;
+      flex-direction: column;
+      margin-top: 40px;
+      gap: 15px;
+      width: 420px;
+      &>button{
+        @include btn_md;
+        margin-top: 20px;
+      }
+    }
+  }
+}
+
+.admin__form{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 700px;
+  margin-top: 55px;
+  gap: 50px;
+  &>button{
+    @include btn_md;
+  }
+  & .admin__random{
+    position: absolute;
+    background-color: #F487A8;
+    top: 27px;
+    border-radius: 18px;
+    right: 30px;
+    & img{
+      width: 65px;
+      height: 60px;
+    }
+  }
+  &>div{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    &>label{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      &>select{
+        padding: 16px 30px;
+        width: 100%;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 140%;
+        letter-spacing: .05em;
+        text-transform: uppercase;
+        color: var(--main-color);
+        background: #fff;
+        border: 2px solid #fa8c8c;
+        border-radius: 9px;
+        appearance: none;
+      }
+      &>input{
+        padding: 16px 30px;
+        width: 100%;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 140%;
+        letter-spacing: .05em;
+        color: var(--main-color);
+        background: #fff;
+        border: 2px solid #fa8c8c;
+        border-radius: 9px;
+        appearance: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width:1400px){
+  .admin__side {
+    grid-area: side;
+    background: linear-gradient(98.29deg, #F487A8 44.19%, #F6ABA4 96.21%);
+    display: flex;
+    padding: 22px;
+    gap: 40px;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .admin {
+    width: 100%;
+    height: 100%;
+    min-height: 100dvh;
+    display: grid;
+    grid-template-areas: "nav nav"
+"side content";
+    grid-template-rows: 70px 1fr;
+    grid-template-columns: 390px 1fr;
+  }
+
+  .admin__side_item {
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 12px;
+    background-color: #eeded9;
+    box-shadow: 0 4px 4px rgba(0,0,0,.25);
+    border-radius: 12px;
+  }
+
+  .admin__side_li {
+    width: 80%;
+    padding: 10px;
+    background-color: #eeded9;
+    box-shadow: 0 4px 4px rgba(0,0,0,.25);
+    border-radius: 18px;
+    font-size: 13px;
+    line-height: 18px;
+    text-align: center;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+
+  .admin__control {
+    flex-direction: column;
+    display: none;
+    width: 100%;
+    height: 100%;
+    padding: 50px 20px;
+  }
+
+
+}
+
+
+@media screen and (max-width:990px){
+  .admin {
+    width: 100%;
+    height: 100%;
+    min-height: 100dvh;
+    display: grid;
+    grid-template-areas: "nav nav"
+"content content"
+  "side side";
+    grid-template-rows: 70px 1fr min-content;
+    grid-template-columns: 1fr;
+  }
+
+  .admin__control{
+    align-items: center;
+  }
+
+  .admin__form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 55px;
+    gap: 40px;
+  }
+  .admin__nav {
+    grid-area: nav;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+    box-shadow: 0 4px 4px rgba(0,0,0,.25);
+    padding: 0 12px;
+  }
+
+}
+
+@media screen and (max-width:500px){
+  .admin__login_title {
+    text-align: center;
+    letter-spacing: -0.01em;
+    color: var(--main-color);
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 120%;
+  }
+
+  .admin__login_form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    gap: 15px;
+    width: 320px;
+  }
+}

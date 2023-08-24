@@ -1,0 +1,57 @@
+@import "mixins";
+
+.nav {
+  display: flex;
+  width: 100%;
+  margin-top: 50px;
+  justify-content: flex-end;
+  padding: var(--pd-screen);
+  align-items: center;
+  height: fit-content;
+  & .logo{
+    width: 150px;
+    scale: 2;
+    height: 80px;
+    transition: all ease-in-out 0.4s;
+    cursor: pointer;
+    &:hover{
+      scale: 1.6;
+
+    }
+  }
+  & .authorization{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    height: 100%;
+    width: fit-content;
+    &__btn{
+      @include btn_cabinet;
+    }
+    &__img{
+      width: 80px;
+      opacity: 0.4;
+      cursor: pointer;
+      height: 38px;
+      &.active{
+        opacity: .8;
+      }
+    }
+    &__profile{
+      display: flex;
+      align-items: center;
+      height: 100%;
+      width: min-content;
+      gap: 5px;
+      text-transform: capitalize;
+    &_name{
+      font-style: normal;
+      font-weight: 400;
+      text-align: right;
+      font-size: 18px;
+      line-height: 105%;
+      opacity: 0.8;
+    }
+    }
+  }
+}

@@ -1,0 +1,120 @@
+@import "mixins";
+
+#error{
+  &_container{
+    &.active{
+      display: flex;
+    }
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    &>div{
+      width: 390px;
+      position: relative;
+      height: fit-content;
+      padding: 45px 35px;
+      background-color: rgba(240, 214, 252, 0.98);
+      border-radius: 30px;
+      &>img{
+        box-sizing: content-box;
+        width: 12px;
+        height: 12px;
+        padding: 8px;
+        border-radius: 100%;
+        border: 1px solid #e43d3d;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+    }
+  }
+  &_text{
+    font-weight: 400;
+    font-size: 20px;
+    user-select: text;
+    line-height: 140%;
+    /* or 28px */
+
+    text-align: center;
+    letter-spacing: -0.03em;
+    opacity: 0.9;
+    color: var(--main-color);
+  }
+}
+
+
+
+
+
+#prize_container{
+  &.active{
+    display: flex;
+  }
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  &>div{
+    width: 390px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    height: fit-content;
+    padding: 45px 35px;
+    background-color: rgba(240, 214, 252, 0.98);
+    border-radius: 30px;
+    &>#prize_close{
+      box-sizing: content-box;
+      width: 12px;
+      height: 12px;
+      padding: 8px;
+      border-radius: 100%;
+      border: 1px solid #e43d3d;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+  }
+}
+#prize_title{
+  text-align: center;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 140%;
+  letter-spacing: -0.03em;
+  color: var(--main-color);
+  opacity: 0.7;
+}
+
+#prize_icon{
+  width: 90px;
+  height: 90px;
+  margin-top: 10px;
+}
+
+#prize_type{
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 140%;
+  letter-spacing: -0.03em;
+  color: var(--main-color);
+}
+
+#prize_name{
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 140%;
+  letter-spacing: -0.03em;
+  color: var(--main-color);
+}
+
