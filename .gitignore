@@ -1,7 +1,11 @@
-backend/node_modules
-frontend/node_modules
-backend/package-lock.json
-frontend/package-lock.json
-frontend/_build
-Новая папка
+archve/backend
+archve/frontend
+frontend_vue
+readme's
+LICENSE
+archve
 .idea
+README.md
+train.js
+backend_nest/dist
+backend_nest/node_modules
