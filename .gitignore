@@ -7,5 +7,3 @@ archve
 .idea
 README.md
 train.js
-backend_nest/dist
-backend_nest/node_modules
