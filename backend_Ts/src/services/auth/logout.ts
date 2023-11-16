@@ -1,4 +1,5 @@
-export const close_session = (req, res) => {
+import { Request, Response } from "express";
+export const close_session = (req: Request, res: Response) => {
 	try {
 		res.clearCookie("refresh_token", {
 			httpOnly: true,

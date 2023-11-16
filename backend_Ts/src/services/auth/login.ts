@@ -1,8 +1,9 @@
 import { pool } from "../../database/db";
 import * as bcrypt from "bcrypt";
 import { JWT_tokens } from "../../config/jwt";
+import { Request, Response } from "express";
 
-export const login = async (req, res) => {
+export const login = async (req: Request, res: Response) => {
 	try {
 		const email = req.body.email;
 		const password = req.body.password;
@@ -18,12 +19,12 @@ export const login = async (req, res) => {
 
 		const validPass = await bcrypt.compare(
 			password,
-			await users.rows[0].user_password,
+			users.rows[0].user_password,
 		);
 		if (!validPass) {
-			return res
-				.status(401)
-				.json({ error: "Password is incorrect, please try again." });
+			return res.status(401).json({
+				error: "Password is incorrect, please try again.",
+			});
 		}
 
 		let TOKENS = JWT_tokens(users.rows[0]);

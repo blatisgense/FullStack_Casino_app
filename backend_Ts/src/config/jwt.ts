@@ -1,14 +1,5 @@
 import * as jwt from "jsonwebtoken";
-
-interface User {
-	user_name: string;
-	user_email: string;
-	user_role: string;
-	user_wheel: number;
-	user_money: number;
-	user_meditation: string[];
-	user_list: string[];
-}
+import { User } from "./types";
 
 const JWT_tokens = ({
 	user_name,

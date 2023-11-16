@@ -19,7 +19,7 @@ export const spin_algorithm = () => {
 			break;
 
 		case 70 < random && random <= 100:
-			prize = null;
+			prize = "nothing";
 			break;
 	}
 	return prize;

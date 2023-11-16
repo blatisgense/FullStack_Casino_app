@@ -5,10 +5,11 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "build": "nest build",
     "start": "nest start --watch",
-    "format": "prettier --write \\\"src/**/*.ts\\\" \\\"tests/**/*.ts\\\"",
-    "eslint": "eslint"
+    "test": "mocha --require ts-node/register --ui bdd 'tests/**/*.ts' --exit",
+    "build": "nest build",
+    "format": "prettier --write src/**/*.ts tests/**/*.ts",
+    "lint-fix": "eslint --fix src/**/*.{js,ts,json} tests/**/*.ts"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
@@ -27,7 +28,9 @@
     "swagger-jsdoc": "^6.2.8",
     "swagger-parser": "^10.0.3",
     "swagger-ui-dist": "^5.7.2",
-    "swagger-ui-express": "^5.0.0"
+    "swagger-ui-express": "^5.0.0",
+    "ts-mocha": "^10.0.0",
+    "ts-node": "^10.9.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",

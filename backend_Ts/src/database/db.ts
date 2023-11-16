@@ -1,15 +1,8 @@
 import { Pool } from "pg";
-
-interface config {
-	host: string;
-	port: string;
-	database: string;
-	user: string;
-	password: string;
-}
+import { db_config } from "../config/types";
 
 //should be in .env file;
-let localPoolConfig: config = {
+let localPoolConfig: db_config = {
 	password: "MegaEmmaPass",
 	user: "postgres",
 	host: "localhost",

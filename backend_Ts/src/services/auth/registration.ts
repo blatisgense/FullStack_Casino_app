@@ -1,38 +1,42 @@
 import { pool } from "../../database/db";
 import * as bcrypt from "bcrypt";
 import { User } from "../../models/User";
+import { Request, Response } from "express";
 
-export const registration = async (req, res) => {
+export const registration = async (req: Request, res: Response) => {
 	try {
-		const hashedPass = await bcrypt.hash(req.body.password, 6);
+		if (!req.body.name || !req.body.email || !req.body.password) {
+			return res.status(401).json({
+				error: `Not enough parameters, check request.body.`,
+			});
+		}
 
-		let userTemplate = await new User({
+		if (
+			!(typeof req.body.name === "string") ||
+			!(typeof req.body.email === "string") ||
+			!(typeof req.body.password === "string")
+		) {
+			return res.status(401).json({
+				error: `Invalid data sent, check request.body.`,
+			});
+		}
+
+		const hashedPass: string = await bcrypt.hash(req.body.password, 6);
+
+		let userTemplate: User = new User({
 			name: req.body.name,
 			email: req.body.email,
 			password: hashedPass,
-			role: req.body.role,
-			wheel: req.body.wheel,
-			money: req.body.money,
-			meditation: req.body.meditation,
-			list: req.body.list,
 		});
-
-		if (
-			userTemplate.name === null ||
-			userTemplate.password === null ||
-			userTemplate.email === null
-		) {
-			return res
-				.status(500)
-				.json({ error: "Data is not found, please fill all required inputs" });
-		}
 
 		const isAlreadyUse = await pool.query(
 			`SELECT * FROM Users WHERE user_email = $1`,
 			[userTemplate.email],
 		);
 		if (isAlreadyUse.rows.length > 0) {
-			return res.status(403).json({ error: "This Email already used." });
+			return res.status(401).json({
+				error: "This Email already used.",
+			});
 		}
 
 		const newUser = await pool.query(
@@ -52,9 +56,9 @@ export const registration = async (req, res) => {
 			return res.status(500).json({ error: newUser.error });
 		}
 
-		return res
-			.status(200)
-			.json({ msg: `Success!  <br> You can Sign In with your data.` });
+		return res.status(200).json({
+			msg: `Success!<br> You can Sign In with your data.`,
+		});
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
 	}

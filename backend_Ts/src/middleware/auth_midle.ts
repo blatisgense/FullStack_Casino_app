@@ -1,16 +1,13 @@
-import { Request, Response, NextFunction } from "express";
+import { Response, NextFunction } from "express";
 import * as jwt from "jsonwebtoken";
 import { pool } from "../database/db";
 import { JWT_tokens } from "../config/jwt";
+import { Request_user } from "../config/types";
 
-interface AuthRequest extends Request {
-	user: object;
-}
-
-let required = false;
+let required: boolean = false;
 // check if user authorized
 export function auth_middle(
-	req: AuthRequest,
+	req: Request_user,
 	res: Response,
 	next: NextFunction,
 ) {
@@ -29,7 +26,12 @@ export function auth_middle(
 						);
 						newData = await newData.rows[0];
 						if (newData.error) {
-							return res.status(403).json({ error: error.message }).end();
+							return res
+								.status(403)
+								.json({
+									error: error.message,
+								})
+								.end();
 						}
 
 						req.user = await newData;
@@ -54,8 +56,7 @@ export function auth_middle(
 							return res
 								.status(403)
 								.json({
-									error:
-										"You're token expired or replaced, please authorize again!",
+									error: "You're tokens expired or replaced, please authorize again!",
 								})
 								.end();
 						}
@@ -66,11 +67,18 @@ export function auth_middle(
 						);
 						newData = await newData.rows[0];
 						if (newData.error) {
-							return res.status(403).json({ error: error.message }).end();
+							return res
+								.status(403)
+								.json({
+									error: error.message,
+								})
+								.end();
 						}
 
-						let TOKENS: { refresh_token: string; access_token: string } =
-							JWT_tokens(newData);
+						let TOKENS: {
+							refresh_token: string;
+							access_token: string;
+						} = JWT_tokens(newData);
 						res.cookie("refresh_token", TOKENS.refresh_token, {
 							httpOnly: true,
 							sameSite: "none",

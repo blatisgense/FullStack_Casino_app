@@ -1,17 +1,34 @@
+import { Request, Response } from "express";
 import { pool } from "../../database/db";
+import { Request_user } from "../../config/types";
 
-export const promocode_check = async (req, res) => {
+export const promocode_check = async (req: Request_user, res: Response) => {
 	try {
+		if (!req.body.promocode) {
+			return res.status(401).json({
+				error: "Not enough data sent.",
+			});
+		}
+
 		//variables
 		const promocode = req.body.promocode;
 		const user = req.user;
-		let code = await pool.query(`SELECT * FROM PromoCodes WHERE promo = $1`, [
-			promocode,
-		]);
+		let code = await pool.query(
+			`SELECT * FROM PromoCodes WHERE promo = $1`,
+			[promocode],
+		);
 
 		// error
+		if (code.error) {
+			return res.status(401).json({
+				error: code.error,
+			});
+		}
+
 		if (code.rows.length === 0) {
-			return res.status(403).json({ error: "This promocode is expired." });
+			return res.status(401).json({
+				error: "Promocode not found.",
+			});
 		}
 
 		//collect newData and returning msg
@@ -23,12 +40,13 @@ export const promocode_check = async (req, res) => {
 			money: number;
 		} = {
 			wheel: user.user_wheel,
-			list: user.user_list,
-			meditation: user.user_meditation,
+			list: [...user.user_list],
+			meditation: [...user.user_meditation],
 			money: user.user_money,
 		};
 
-		let msg = `При использовании промокода вы получили: <br>`;
+		let msg = `You've got: <br>`;
+
 		if (code.promo_wheel > 0) {
 			newData.wheel = Number(newData.wheel) + Number(code.promo_wheel);
 			msg += `Wheels: ${Number(code.promo_wheel)} <br>`;
@@ -71,7 +89,7 @@ export const promocode_check = async (req, res) => {
 			],
 		);
 		if (update_data.error) {
-			return res.status(403).json({ error: update_data.error });
+			return res.status(401).json({ error: update_data.error });
 		}
 
 		//delete promo after use

@@ -1,4 +1,3 @@
 {
-    "timeout": "10000",
     "extension" : ["js", "ts"]
 }

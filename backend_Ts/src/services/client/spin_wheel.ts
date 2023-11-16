@@ -1,112 +1,61 @@
 import { pool } from "../../database/db";
 import { random_product } from "../../config/random_product";
 import { spin_algorithm } from "../../config/spin_algorithm";
+import { Response } from "express";
+import { Request_user } from "../../config/types";
 
-export const spin_wheel = async (req, res) => {
+export const spin_wheel = async (req: Request_user, res: Response) => {
 	try {
 		let user = req.user;
-		if (Number(user.user_wheel) > 0) {
-			// prize name
-			let item_name: string;
-			// getting the prize
-			let prize: any = spin_algorithm();
-			console.log(prize);
+
+		if (Number(user.user_wheel) <= 0) {
+			return res.status(401).json({
+				error: "You haven't got any wheels for spin",
+			});
+		}
+
+		// prize name
+		let item_name: string;
+		// getting the prize
+		let prize: string = spin_algorithm();
+
+		async function return_data() {
+			return res.status(200).json({
+				item_name: item_name,
+				prize: prize,
+			});
+		}
+
+		if (prize === "wheel" || prize === "money" || prize === "nothing") {
+			async function prize_fn({ name }: { name: string }) {
+				item_name = name;
+				let wheels: number;
+
+				if (prize === "wheel") {
+					wheels = Number(user.user_wheel) + 1;
+				}
+
+				if (prize === "nothing") {
+					wheels = Number(user.user_wheel) - 1;
+				}
+
+				const update_data = await pool.query(
+					`UPDATE Users SET user_wheel = $1 WHERE user_email = $2`,
+					[wheels, user.user_email],
+				);
+				if (update_data.error) {
+					return res.status(401).json({
+						error: update_data.error,
+					});
+				}
+				return await return_data();
+			}
 
 			switch (prize) {
-				case "meditation":
-					let prize_meditation = await random_product("meditation");
-					if (prize_meditation.error) {
-						return res.status(403).json({ error: prize_meditation.error });
-					}
-					// set prize name
-					item_name = `${prize_meditation}`;
-
-					// check if user already have this prize
-					if (!user.user_meditation.includes(prize_meditation)) {
-						let arr = [];
-						arr.push(prize_meditation);
-						user.user_meditation.map((el) => {
-							arr.push(el);
-						});
-						//update data in Users database
-						const update_data_meditation = await pool.query(
-							`UPDATE Users SET (user_meditation, user_wheel) = ($1, $2) WHERE user_email = $3`,
-							[arr, Number(user.user_wheel) - 1, user.user_email],
-						);
-						if (update_data_meditation.error) {
-							return res
-								.status(403)
-								.json({ error: update_data_meditation.error });
-						}
-					} else {
-						//update data in Users database
-						const update_data_meditation = await pool.query(
-							`UPDATE Users SET user_wheel = $1 WHERE user_email = $2`,
-							[Number(user.user_wheel) - 1, user.user_email],
-						);
-						if (update_data_meditation.error) {
-							return res
-								.status(403)
-								.json({ error: update_data_meditation.error });
-						}
-					}
-					break;
-
 				case "wheel":
-					item_name = `wheel`;
-					const update_data_wheel = await pool.query(
-						`UPDATE Users SET user_wheel = $1 WHERE user_email = $2`,
-						[Number(user.user_wheel) - 1, user.user_email],
-					);
-					if (update_data_wheel.error) {
-						return res.status(403).json({ error: update_data_wheel.error });
-					}
-					break;
-
-				case "list":
-					let prize_list = await random_product("list");
-					if (prize_list.error) {
-						return res.status(403).json({ error: prize_list.error });
-					}
-					item_name = `${prize_list}`;
-					if (!user.user_list.includes(prize_list)) {
-						//update data in Users database
-						let arr = [];
-						arr.push(prize_list);
-						user.user_list.map((el) => {
-							arr.push(el);
-						});
-						const update_data_list = await pool.query(
-							`UPDATE Users SET (user_list, user_wheel) = ($1, $2) WHERE user_email = $3`,
-							[arr, Number(user.user_wheel) - 1, user.user_email],
-						);
-						if (update_data_list.error) {
-							return res.status(403).json({ error: update_data_list.error });
-						}
-					} else {
-						//update data in Users database
-						const update_data_list = await pool.query(
-							`UPDATE Users SET user_wheel = $1 WHERE user_email = $2`,
-							[Number(user.user_wheel) - 1, user.user_email],
-						);
-						if (update_data_list.error) {
-							return res.status(403).json({ error: update_data_list.error });
-						}
-					}
-
-					break;
-
-				case null:
-					item_name = `no`;
-					const update_data_null = await pool.query(
-						`UPDATE Users SET user_wheel = $1 WHERE user_email = $2`,
-						[Number(user.user_wheel) - 1, user.user_email],
-					);
-					if (update_data_null.error) {
-						return res.status(403).json({ error: update_data_null.error });
-					}
-					break;
-
+					return await prize_fn({ name: "wheel" });
+				case "nothing":
+					return await prize_fn({ name: "nothing" });
 				case "money":
 					item_name = `money`;
 					const update_data_money = await pool.query(
@@ -118,17 +67,61 @@ export const spin_wheel = async (req, res) => {
 						],
 					);
 					if (update_data_money.error) {
-						return res.status(403).json({ error: update_data_money.error });
+						return res.status(401).json({
+							error: update_data_money.error,
+						});
 					}
-					break;
+					return await return_data();
+			}
+		}
+
+		if (prize === "list" || prize === "meditation") {
+			async function prize_fn({
+				name,
+				arr,
+				query,
+			}: {
+				name: string;
+				arr: string[];
+				query: string;
+			}) {
+				item_name = await random_product(name);
+				let result = [...arr];
+				if (!arr.includes(item_name)) {
+					result.push(item_name);
+					// arr.map((el) => {
+					// 	result.push(el);
+					// });
+				}
+
+				const update_data = await pool.query(
+					`UPDATE Users SET (${query}, user_wheel) = ($1, $2) WHERE user_email = $3`,
+					[result, Number(user.user_wheel) - 1, user.user_email],
+				);
+
+				if (update_data.error) {
+					return res.status(401).json({
+						error: update_data.error,
+					});
+				}
+
+				return await return_data();
 			}
 
-			//return msg
-			return res.status(200).json({ item_name: item_name, prize: prize });
-		} else {
-			return res
-				.status(403)
-				.json({ error: "You haven't got any wheels for spin" });
+			switch (prize) {
+				case "meditation":
+					return await prize_fn({
+						name: "meditation",
+						arr: user.user_meditation,
+						query: "user_meditation",
+					});
+				case "list":
+					return await prize_fn({
+						name: "list",
+						arr: user.user_list,
+						query: "user_list",
+					});
+			}
 		}
 	} catch (error) {
 		return res.status(500).json({ error: error.message });

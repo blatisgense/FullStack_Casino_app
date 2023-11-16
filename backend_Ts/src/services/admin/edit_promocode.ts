@@ -1,50 +1,83 @@
 import { pool } from "../../database/db";
 import { Promo } from "../../models/PromoCode";
+import { Request, Response } from "express";
 
-export const edit_promocode = async (req, res) => {
+export const edit_promocode = async (req: Request, res: Response) => {
 	try {
-		let promoTemplate: Promo = new Promo({
-			promo: req.body.promo,
-			wheel: 0,
-			money: 0,
-			meditation: [],
-			list: [],
-		});
+		if (!req.body.method || !req.body.promo) {
+			return res.status(401).json({
+				error: `Not enough parameters, check request.body.`,
+			});
+		}
+
+		if (!(req.body.method === "delete" || req.body.method === "add")) {
+			return res.status(401).json({
+				error: `Invalid data sent, check request.body.`,
+			});
+		}
 
 		if (req.body.method === "delete") {
 			const delete_promo = await pool.query(
 				`DELETE FROM PromoCodes WHERE promo = $1`,
-				[promoTemplate.promo],
+				[req.body.promo],
 			);
 			if (delete_promo.error) {
 				return res.status(500).json({ error: delete_promo.error });
 			}
 			return res.status(200).json({
-				msg: `Promocode ${promoTemplate.promo} deleted successfully.`,
+				msg: `Promocode ${req.body.promo} deleted successfully.`,
+			});
+		}
+
+		if (!req.body.give || !req.body.value) {
+			return res.status(401).json({
+				error: `Not enough parameters, check request.body.`,
+			});
+		}
+
+		if (
+			!(
+				req.body.give === "money" ||
+				req.body.give === "wheel" ||
+				req.body.give === "meditation" ||
+				req.body.give === "list"
+			)
+		) {
+			return res.status(401).json({
+				error: `Invalid data sent, check request.body.`,
+			});
+		}
+
+		if (
+			(req.body.give === "money" || req.body.give === "wheel") &&
+			isNaN(Number(req.body.value))
+		) {
+			return res.status(401).json({
+				error: `Invalid data sent, value should be a Number.`,
 			});
 		}
 
 		if (req.body.method === "add") {
 			const isAlreadyUse = await pool.query(
 				`SELECT * FROM PromoCodes WHERE promo = $1`,
-				[promoTemplate.promo],
+				[req.body.promo],
 			);
 			if (isAlreadyUse.rows.length > 0) {
-				return res.status(403).json({ error: "This Promo already exist." });
+				return res.status(401).json({
+					error: "This Promo already exist.",
+				});
 			}
+
+			let promoTemplate: Promo = new Promo({
+				promo: req.body.promo,
+			});
 
 			switch (req.body.give) {
 				case "wheel":
-					if (isNaN(Number(req.body.value))) {
-						return res.status(402).json({ error: `Please type a number` });
-					}
-					promoTemplate.wheel = req.body.value;
+					promoTemplate.wheel = Number(req.body.value);
 					break;
 				case "money":
-					if (isNaN(Number(req.body.value))) {
-						return res.status(402).json({ error: `Please type a number` });
-					}
-					promoTemplate.money = req.body.value;
+					promoTemplate.money = Number(req.body.value);
 					break;
 				case "meditation":
 					promoTemplate.meditation.push(req.body.value);
@@ -67,7 +100,9 @@ export const edit_promocode = async (req, res) => {
 			if (newPromo.error) {
 				return res.status(500).json({ error: newPromo.error });
 			}
-			res.status(200).json({ msg: `Promocode created successfully.` });
+			res.status(200).json({
+				msg: `Promocode ${req.body.promo} created successfully.`,
+			});
 		}
 	} catch (error) {
 		return res.status(500).json({ error: error.message });

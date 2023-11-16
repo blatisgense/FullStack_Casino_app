@@ -20,7 +20,7 @@ export const random_product = async (product_type: string) => {
 		if (product_type === "list") {
 			return product(arr.products_list);
 		}
-	} catch (e) {
-		return e;
+	} catch (error) {
+		return error;
 	}
 };

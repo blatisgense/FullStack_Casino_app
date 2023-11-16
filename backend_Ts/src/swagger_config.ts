@@ -594,9 +594,9 @@ export const swagger_config: OpenAPIObject = {
 
 		"/api/admin/get": {
 			post: {
-				summary: "Admin_controller | Send list of users or user to the client.",
-				description:
-					"Spins the 'wheel' and return 'prize' to the client, update User data.",
+				summary:
+					"Admin_controller | Send list of users or user to the client.",
+				description: "Send list of users or user to the client.",
 				parameters: [
 					{
 						name: "Access Token",
@@ -644,9 +644,10 @@ export const swagger_config: OpenAPIObject = {
 									},
 									identificator: {
 										type: "string",
-										example: "9e30b7de-906c-46ed-8973-a8d094b94d11",
+										example:
+											"9e30b7de-906c-46ed-8973-a8d094b94d11",
 										description:
-											"Set email or id (in dependency of 'method' property) of User, that you search",
+											"Set email or ID (in dependency of 'method' property) of User, that you search",
 									},
 								},
 							},
@@ -665,7 +666,8 @@ export const swagger_config: OpenAPIObject = {
 									properties: {
 										user_id: {
 											type: "string",
-											example: "9e30b7de-906c-46ed-8973-a8d094b94d11",
+											example:
+												"9e30b7de-906c-46ed-8973-a8d094b94d11",
 											description: "Unique User's ID",
 										},
 										user_email: {
@@ -680,13 +682,16 @@ export const swagger_config: OpenAPIObject = {
 										},
 										user_password: {
 											type: "string",
-											example: "aaisjdasj-asiodasjd-aksdipasjd",
-											description: "User's password (encrypted)",
+											example:
+												"aaisjdasj-asiodasjd-aksdipasjd",
+											description:
+												"User's password (encrypted)",
 										},
 										user_wheel: {
 											type: "integer",
 											example: 10,
-											description: "User's tries to spin wheel",
+											description:
+												"User's tries to spin wheel",
 										},
 										user_list: {
 											type: "string[]",
@@ -709,7 +714,7 @@ export const swagger_config: OpenAPIObject = {
 						},
 					},
 					"401": {
-						description: "DB query error.",
+						description: "Request body error, invalid data sent.",
 						content: {
 							"application/json": {
 								schema: {
@@ -718,7 +723,7 @@ export const swagger_config: OpenAPIObject = {
 										error: {
 											type: "string",
 											example: "Error description text",
-											description: "Error description from PostgresQL",
+											description: "Error description",
 										},
 									},
 								},
@@ -743,8 +748,8 @@ export const swagger_config: OpenAPIObject = {
 							},
 						},
 					},
-					"405": {
-						description: "Invalid data sent.",
+					"500": {
+						description: "Internal server error.",
 						content: {
 							"application/json": {
 								schema: {
@@ -752,25 +757,8 @@ export const swagger_config: OpenAPIObject = {
 									properties: {
 										error: {
 											type: "string",
-											example: "Invalid data sent, check request.body",
-											description: "Invalid values of props sent",
-										},
-									},
-								},
-							},
-						},
-					},
-					"406": {
-						description: "Not enough data sent.",
-						content: {
-							"application/json": {
-								schema: {
-									type: "object",
-									properties: {
-										error: {
-											type: "string",
-											example: "Not enough data sent, check request.body.",
-											description: "No required props sent",
+											example: "Error description text",
+											description: "Error description",
 										},
 									},
 								},
@@ -779,13 +767,13 @@ export const swagger_config: OpenAPIObject = {
 					},
 				},
 			},
-		},
+		}, //
 
 		"/api/admin/change_product": {
 			post: {
-				summary: "Client_controller | Spins the 'wheel'.",
-				description:
-					"Spins the 'wheel' and return 'prize' to the client, update User data.",
+				summary:
+					"Admin_controller | Change User products (Check-lists, meditations).",
+				description: "Change User products (Check-lists, meditations)",
 				parameters: [
 					{
 						name: "Access Token",
@@ -818,8 +806,36 @@ export const swagger_config: OpenAPIObject = {
 							schema: {
 								type: "object",
 								properties: {
-									username: {
+									method: {
 										type: "string",
+										example: "id",
+										description:
+											"Choose which unique User field use for search (id | email)",
+									},
+									identificator: {
+										type: "string",
+										example:
+											"9e30b7de-906c-46ed-8973-a8d094b94d11",
+										description:
+											"Set email or ID (in dependency of 'method' property) of User, that you search",
+									},
+									type: {
+										example: "meditation",
+										type: "string",
+										description:
+											"Choose which User product change",
+									},
+									value: {
+										example: "meditation_name",
+										type: "string",
+										description:
+											"Adds/deletes products to User",
+									},
+									move: {
+										example: "delete",
+										type: "string",
+										description:
+											"Choose to Adds/Deletes product",
 									},
 								},
 							},
@@ -829,20 +845,69 @@ export const swagger_config: OpenAPIObject = {
 
 				responses: {
 					"200": {
-						description:
-							"Successfully spins the 'wheel' and return 'prize' to the client, successfully write result to DB",
+						description: "Successfully change User product",
 						content: {
 							"application/json": {
 								schema: {
 									type: "object",
 									properties: {
-										id: {
-											type: "integer",
-											example: 4,
-										},
-										name: {
+										msg: {
 											type: "string",
-											example: "Jessica Smith",
+											example:
+												"Item product name deletes successfully.",
+											description: "Message with info",
+										},
+									},
+								},
+							},
+						},
+					},
+					"401": {
+						description: "Request body error, invalid data sent.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description: "Unable to authorize",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+											description: "Error description",
 										},
 									},
 								},
@@ -851,13 +916,13 @@ export const swagger_config: OpenAPIObject = {
 					},
 				},
 			},
-		},
+		}, //
 
 		"/api/admin/change_data": {
 			post: {
-				summary: "Client_controller | Spins the 'wheel'.",
-				description:
-					"Spins the 'wheel' and return 'prize' to the client, update User data.",
+				summary:
+					"Admin_controller | Change User data (Role, money, wheels).",
+				description: "Change User data (Role, money, wheels).",
 				parameters: [
 					{
 						name: "Access Token",
@@ -890,8 +955,30 @@ export const swagger_config: OpenAPIObject = {
 							schema: {
 								type: "object",
 								properties: {
-									username: {
+									method: {
 										type: "string",
+										example: "id",
+										description:
+											"Choose which unique User field use for search (id | email)",
+									},
+									identificator: {
+										type: "string",
+										example:
+											"9e30b7de-906c-46ed-8973-a8d094b94d11",
+										description:
+											"Set email or ID (in dependency of 'method' property) of User, that you search",
+									},
+									type: {
+										example: "role",
+										type: "string",
+										description:
+											"Choose which User parameter change",
+									},
+									value: {
+										example: "ADMIN",
+										type: "string",
+										description:
+											"New value of changing parameter",
 									},
 								},
 							},
@@ -901,20 +988,69 @@ export const swagger_config: OpenAPIObject = {
 
 				responses: {
 					"200": {
-						description:
-							"Successfully spins the 'wheel' and return 'prize' to the client, successfully write result to DB",
+						description: "Successfully change User parameter",
 						content: {
 							"application/json": {
 								schema: {
 									type: "object",
 									properties: {
-										id: {
-											type: "integer",
-											example: 4,
-										},
-										name: {
+										msg: {
 											type: "string",
-											example: "Jessica Smith",
+											example:
+												"Parameter_name changed to New_value",
+											description: "Message with info",
+										},
+									},
+								},
+							},
+						},
+					},
+					"401": {
+						description: "Request body error, invalid data sent.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description: "Unable to authorize",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+											description: "Error description",
 										},
 									},
 								},
@@ -923,7 +1059,7 @@ export const swagger_config: OpenAPIObject = {
 					},
 				},
 			},
-		},
+		}, //
 
 		"/api/admin/edit": {
 			post: {

@@ -4,6 +4,9 @@ frontend_vue
 readme's
 LICENSE
 archve
+backend_Ts/node_modules
+backend_Ts/.env
+backend_Ts/package-lock.json
 .idea
 README.md
 train.js

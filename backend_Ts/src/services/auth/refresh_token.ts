@@ -1,17 +1,16 @@
 import { JWT_tokens } from "../../config/jwt";
 import * as jwt from "jsonwebtoken";
 import { pool } from "../../database/db";
+import { Request, Response } from "express";
 
-export const refresh_token = (req, res) => {
+export const refresh_token = (req: Request, res: Response) => {
 	try {
-		const refresh_token = req.cookies.refresh_token;
-
-		if (refresh_token === null) {
-			return res.status(401).json("Refresh TOKEN not found");
+		if (req.cookies.refresh_token === null) {
+			return res.status(403).json({ error: "Refresh TOKEN not found." });
 		}
 
 		jwt.verify(
-			refresh_token,
+			req.cookies.refresh_token,
 			process.env.UPDATE_TOKEN_SECRET,
 			async (error, user) => {
 				if (error) {
@@ -24,8 +23,10 @@ export const refresh_token = (req, res) => {
 					[email],
 				);
 				newData = await newData.rows[0];
-				let TOKENS: { access_token: string; refresh_token: string } =
-					JWT_tokens(newData);
+				let TOKENS: {
+					access_token: string;
+					refresh_token: string;
+				} = JWT_tokens(newData);
 				res.cookie("refresh_token", TOKENS.refresh_token, {
 					httpOnly: true,
 					sameSite: "none",
@@ -36,10 +37,10 @@ export const refresh_token = (req, res) => {
 					sameSite: "none",
 					secure: true,
 				});
-				return res.status(200).json("Success");
+				return res.status(200).json({ msg: "Tokens updated." });
 			},
 		);
 	} catch (error) {
-		return res.status(401).json({ error: error.message });
+		return res.status(500).json({ error: error.message });
 	}
 };

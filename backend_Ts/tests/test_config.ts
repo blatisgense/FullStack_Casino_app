@@ -2,11 +2,12 @@
 export let config: {
 	access_cookie: string;
 	refresh_cookie: string;
+	user_cookie: string;
 } = {
 	access_cookie: "",
 	refresh_cookie: "",
+	user_cookie: "",
 };
-
 
 //RegExps for extract cookie value from Headers
 export const refresh: RegExp = new RegExp(

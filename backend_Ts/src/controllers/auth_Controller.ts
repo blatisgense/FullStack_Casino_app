@@ -8,6 +8,7 @@ import { registration } from "../services/auth/registration";
 import { refresh_token } from "../services/auth/refresh_token";
 import { close_session } from "../services/auth/logout";
 import { get_data } from "../services/auth/get_data";
+import { Request_user } from "../config/types";
 
 @Controller()
 export class Auth_Controller {
@@ -32,7 +33,7 @@ export class Auth_Controller {
 	}
 
 	@Get(APIS.get_data)
-	async Get_data(@Req() req: Request, @Res() res: Response) {
+	async Get_data(@Req() req: Request_user, @Res() res: Response) {
 		await get_data(req, res);
 	}
 }
