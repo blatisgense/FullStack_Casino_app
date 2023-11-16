@@ -186,7 +186,9 @@ describe("Admin | Change User data", () => {
 				.end((err, res) => {
 					res.should.have.status(401);
 					res.body.should.have.property("error");
-					res.body.error.should.to.equal("Role should be USER or ADMIN");
+					res.body.error.should.to.equal(
+						"Role should be USER or ADMIN",
+					);
 					done();
 				});
 		});
@@ -204,7 +206,9 @@ describe("Admin | Change User data", () => {
 				.end((err, res) => {
 					res.should.have.status(401);
 					res.body.should.have.property("error");
-					res.body.error.should.to.equal("User not found, check the data.");
+					res.body.error.should.to.equal(
+						"User not found, check the data.",
+					);
 					done();
 				});
 		});
@@ -222,7 +226,9 @@ describe("Admin | Change User data", () => {
 				.end((err, res) => {
 					res.should.have.status(401);
 					res.body.should.have.property("error");
-					res.body.error.should.to.equal("User not found, check the data.");
+					res.body.error.should.to.equal(
+						"User not found, check the data.",
+					);
 					done();
 				});
 		});
