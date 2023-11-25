@@ -10,3 +10,4 @@ backend_Ts/package-lock.json
 .idea
 README.md
 train.js
+backend_Ts/dist

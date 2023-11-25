@@ -23,6 +23,14 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
      promo_list TEXT[] NOT NULL
  );
 
+  CREATE TABLE Feedback (
+     Msg TEXT NOT NULL,
+     Sender_name TEXT NOT NULL,
+     Sender_email TEXT NOT NULL,
+     Status TEXT NOT NULL,
+     msg_id SERIAL PRIMARY KEY
+ );
+
  CREATE TABLE Products (
      Products_meditation TEXT[] NOT NULL,
      Products_list TEXT[] NOT NULL

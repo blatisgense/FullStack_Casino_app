@@ -13,182 +13,14 @@ export const swagger_config: OpenAPIObject = {
 		},
 	},
 	paths: {
-		//client_controller
-		"/api/client/spin": {
-			get: {
-				summary: "Client_controller | Spins the 'wheel'.",
-				description:
-					"Spins the 'wheel' and return 'prize' to the client, update User data.",
-				parameters: [
-					{
-						name: "Access Token",
-						in: "cookie",
-						required: true,
-						description: "Access token, to verify auth.",
-						schema: {
-							type: "string",
-							example:
-								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-						},
-					},
-					{
-						name: "Refresh Token",
-						in: "cookie",
-						required: true,
-						description: "Refresh token, to verify auth.",
-						schema: {
-							type: "string",
-							example:
-								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-						},
-					},
-				],
-
-				requestBody: {
-					required: true,
-					content: {
-						"application/json": {
-							schema: {
-								type: "object",
-								properties: {
-									username: {
-										type: "string",
-									},
-								},
-							},
-						},
-					},
-				},
-
-				responses: {
-					"200": {
-						description:
-							"Successfully spins the 'wheel' and return 'prize' to the client, successfully write result to DB",
-						content: {
-							"application/json": {
-								schema: {
-									type: "object",
-									properties: {
-										id: {
-											type: "integer",
-											example: 4,
-										},
-										name: {
-											type: "string",
-											example: "Jessica Smith",
-										},
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-
-		"/api/client/promocode_check": {
-			post: {
-				summary: "Client_controller | Spins the 'wheel'.",
-				description:
-					"Spins the 'wheel' and return 'prize' to the client, update User data.",
-				parameters: [
-					{
-						name: "Access Token",
-						in: "cookie",
-						required: true,
-						description: "Access token, to verify auth.",
-						schema: {
-							type: "string",
-							example:
-								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-						},
-					},
-					{
-						name: "Refresh Token",
-						in: "cookie",
-						required: true,
-						description: "Refresh token, to verify auth.",
-						schema: {
-							type: "string",
-							example:
-								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-						},
-					},
-				],
-
-				requestBody: {
-					required: true,
-					content: {
-						"application/json": {
-							schema: {
-								type: "object",
-								properties: {
-									username: {
-										type: "string",
-									},
-								},
-							},
-						},
-					},
-				},
-
-				responses: {
-					"200": {
-						description:
-							"Successfully spins the 'wheel' and return 'prize' to the client, successfully write result to DB",
-						content: {
-							"application/json": {
-								schema: {
-									type: "object",
-									properties: {
-										id: {
-											type: "integer",
-											example: 4,
-										},
-										name: {
-											type: "string",
-											example: "Jessica Smith",
-										},
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-
-		//auth_controller
+		//====================
+		// AUTH
+		//====================
 		"/api/auth/login": {
 			post: {
-				summary: "Client_controller | Spins the 'wheel'.",
-				description:
-					"Spins the 'wheel' and return 'prize' to the client, update User data.",
-				parameters: [
-					{
-						name: "Access Token",
-						in: "cookie",
-						required: true,
-						description: "Access token, to verify auth.",
-						schema: {
-							type: "string",
-							example:
-								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-						},
-					},
-					{
-						name: "Refresh Token",
-						in: "cookie",
-						required: true,
-						description: "Refresh token, to verify auth.",
-						schema: {
-							type: "string",
-							example:
-								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-						},
-					},
-				],
-
+				tags: ["Auth"],
+				summary: "Auth_controller | Login.",
+				description: "Login into account, sets Auth cookies.",
 				requestBody: {
 					required: true,
 					content: {
@@ -196,31 +28,69 @@ export const swagger_config: OpenAPIObject = {
 							schema: {
 								type: "object",
 								properties: {
-									username: {
+									email: {
 										type: "string",
+										example: "lavr.marudenko@gmail.com",
+										description: "User email.",
+									},
+									password: {
+										type: "string",
+										example: "pass1234",
+										description: "User password.",
 									},
 								},
 							},
 						},
 					},
 				},
-
 				responses: {
 					"200": {
 						description:
-							"Successfully spins the 'wheel' and return 'prize' to the client, successfully write result to DB",
+							"Successfully logins, set Access and Refresh tokens in cookies",
 						content: {
 							"application/json": {
 								schema: {
 									type: "object",
 									properties: {
-										id: {
-											type: "integer",
-											example: 4,
-										},
-										name: {
+										msg: {
 											type: "string",
-											example: "Jessica Smith",
+											example:
+												"You've logged in successfully.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"401": {
+						description:
+							"Invalid data sent | User not found | Password is incorrect | DB error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"Password is incorrect, please try again.",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
 										},
 									},
 								},
@@ -230,37 +100,11 @@ export const swagger_config: OpenAPIObject = {
 				},
 			},
 		},
-
 		"/api/auth/register": {
 			post: {
-				summary: "Client_controller | Spins the 'wheel'.",
-				description:
-					"Spins the 'wheel' and return 'prize' to the client, update User data.",
-				parameters: [
-					{
-						name: "Access Token",
-						in: "cookie",
-						required: true,
-						description: "Access token, to verify auth.",
-						schema: {
-							type: "string",
-							example:
-								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-						},
-					},
-					{
-						name: "Refresh Token",
-						in: "cookie",
-						required: true,
-						description: "Refresh token, to verify auth.",
-						schema: {
-							type: "string",
-							example:
-								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-						},
-					},
-				],
-
+				tags: ["Auth"],
+				summary: "Auth_controller | Registration.",
+				description: "Register new User.",
 				requestBody: {
 					required: true,
 					content: {
@@ -268,31 +112,71 @@ export const swagger_config: OpenAPIObject = {
 							schema: {
 								type: "object",
 								properties: {
-									username: {
+									email: {
 										type: "string",
+										example: "lavr.marudenko@gmail.com",
+										description: "User email.",
+									},
+									password: {
+										type: "string",
+										example: "pass1234",
+										description: "User password.",
+									},
+									name: {
+										type: "string",
+										example: "Lavrentij",
+										description: "User name.",
 									},
 								},
 							},
 						},
 					},
 				},
-
 				responses: {
 					"200": {
-						description:
-							"Successfully spins the 'wheel' and return 'prize' to the client, successfully write result to DB",
+						description: "Successfully register new User.",
 						content: {
 							"application/json": {
 								schema: {
 									type: "object",
 									properties: {
-										id: {
-											type: "integer",
-											example: 4,
-										},
-										name: {
+										msg: {
 											type: "string",
-											example: "Jessica Smith",
+											example: `Success!<br> You can Sign In with your data.`,
+										},
+									},
+								},
+							},
+						},
+					},
+					"401": {
+						description:
+							"Invalid data sent | This Email already used. | DB error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "This Email already used.",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
 										},
 									},
 								},
@@ -302,69 +186,39 @@ export const swagger_config: OpenAPIObject = {
 				},
 			},
 		},
-
-		"/api/auth/refresh_tokens": {
-			post: {
-				summary: "Client_controller | Spins the 'wheel'.",
-				description:
-					"Spins the 'wheel' and return 'prize' to the client, update User data.",
-				parameters: [
-					{
-						name: "Access Token",
-						in: "cookie",
-						required: true,
-						description: "Access token, to verify auth.",
-						schema: {
-							type: "string",
-							example:
-								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-						},
-					},
-					{
-						name: "Refresh Token",
-						in: "cookie",
-						required: true,
-						description: "Refresh token, to verify auth.",
-						schema: {
-							type: "string",
-							example:
-								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-						},
-					},
-				],
-
-				requestBody: {
-					required: true,
-					content: {
-						"application/json": {
-							schema: {
-								type: "object",
-								properties: {
-									username: {
-										type: "string",
-									},
-								},
-							},
-						},
-					},
-				},
-
+		"/api/auth/logout": {
+			delete: {
+				tags: ["Auth"],
+				summary: "Auth_controller | Logout",
+				description: "Deletes Auth cookies.",
 				responses: {
 					"200": {
-						description:
-							"Successfully spins the 'wheel' and return 'prize' to the client, successfully write result to DB",
+						description: "Successfully logouts.",
 						content: {
 							"application/json": {
 								schema: {
 									type: "object",
 									properties: {
-										id: {
-											type: "integer",
-											example: 4,
-										},
-										name: {
+										msg: {
 											type: "string",
-											example: "Jessica Smith",
+											example:
+												"You have logout successfully.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
 										},
 									},
 								},
@@ -374,12 +228,14 @@ export const swagger_config: OpenAPIObject = {
 				},
 			},
 		},
-
-		"/api/auth/delete_session": {
-			post: {
-				summary: "Client_controller | Spins the 'wheel'.",
-				description:
-					"Spins the 'wheel' and return 'prize' to the client, update User data.",
+		//====================
+		// CLIENT
+		//====================
+		"/api/client/wheel/spin": {
+			get: {
+				tags: ["Client"],
+				summary: "Client_controller | Spin 'wheel'.",
+				description: "Spins 'wheel', return prize.",
 				parameters: [
 					{
 						name: "Access Token",
@@ -396,223 +252,6 @@ export const swagger_config: OpenAPIObject = {
 						name: "Refresh Token",
 						in: "cookie",
 						required: true,
-						description: "Refresh token, to verify auth.",
-						schema: {
-							type: "string",
-							example:
-								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-						},
-					},
-				],
-
-				requestBody: {
-					required: true,
-					content: {
-						"application/json": {
-							schema: {
-								type: "object",
-								properties: {
-									username: {
-										type: "string",
-									},
-								},
-							},
-						},
-					},
-				},
-
-				responses: {
-					"200": {
-						description:
-							"Successfully spins the 'wheel' and return 'prize' to the client, successfully write result to DB",
-						content: {
-							"application/json": {
-								schema: {
-									type: "object",
-									properties: {
-										id: {
-											type: "integer",
-											example: 4,
-										},
-										name: {
-											type: "string",
-											example: "Jessica Smith",
-										},
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-
-		"/api/auth/get_data": {
-			post: {
-				summary: "Client_controller | Spins the 'wheel'.",
-				description:
-					"Spins the 'wheel' and return 'prize' to the client, update User data.",
-				parameters: [
-					{
-						name: "Access Token",
-						in: "cookie",
-						required: true,
-						description: "Access token, to verify auth.",
-						schema: {
-							type: "string",
-							example:
-								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-						},
-					},
-					{
-						name: "Refresh Token",
-						in: "cookie",
-						required: true,
-						description: "Refresh token, to verify auth.",
-						schema: {
-							type: "string",
-							example:
-								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-						},
-					},
-				],
-
-				requestBody: {
-					required: true,
-					content: {
-						"application/json": {
-							schema: {
-								type: "object",
-								properties: {
-									username: {
-										type: "string",
-									},
-								},
-							},
-						},
-					},
-				},
-
-				responses: {
-					"200": {
-						description:
-							"Successfully spins the 'wheel' and return 'prize' to the client, successfully write result to DB",
-						content: {
-							"application/json": {
-								schema: {
-									type: "object",
-									properties: {
-										id: {
-											type: "integer",
-											example: 4,
-										},
-										name: {
-											type: "string",
-											example: "Jessica Smith",
-										},
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-
-		//admin_controller
-		"/api/admin/create": {
-			post: {
-				summary: "Client_controller | Spins the 'wheel'.",
-				description:
-					"Spins the 'wheel' and return 'prize' to the client, update User data.",
-				parameters: [
-					{
-						name: "Access Token",
-						in: "cookie",
-						required: true,
-						description: "Access token, to verify auth.",
-						schema: {
-							type: "string",
-							example:
-								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-						},
-					},
-					{
-						name: "Refresh Token",
-						in: "cookie",
-						required: true,
-						description: "Refresh token, to verify auth.",
-						schema: {
-							type: "string",
-							example:
-								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-						},
-					},
-				],
-
-				requestBody: {
-					required: true,
-					content: {
-						"application/json": {
-							schema: {
-								type: "object",
-								properties: {
-									username: {
-										type: "string",
-									},
-								},
-							},
-						},
-					},
-				},
-
-				responses: {
-					"200": {
-						description:
-							"Successfully spins the 'wheel' and return 'prize' to the client, successfully write result to DB",
-						content: {
-							"application/json": {
-								schema: {
-									type: "object",
-									properties: {
-										id: {
-											type: "integer",
-											example: 4,
-										},
-										name: {
-											type: "string",
-											example: "Jessica Smith",
-										},
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-
-		"/api/admin/get": {
-			post: {
-				summary:
-					"Admin_controller | Send list of users or user to the client.",
-				description: "Send list of users or user to the client.",
-				parameters: [
-					{
-						name: "Access Token",
-						in: "cookie",
-						required: true,
-						description: "Access token, to verify auth.",
-						schema: {
-							type: "string",
-							example:
-								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-						},
-					},
-					{
-						name: "Refresh Token",
-						in: "cookie",
-						required: false,
 						description:
 							"Refresh token, to verify auth if access Token expired",
 						schema: {
@@ -622,91 +261,1518 @@ export const swagger_config: OpenAPIObject = {
 						},
 					},
 				],
-
-				requestBody: {
-					required: true,
-					content: {
-						"application/json": {
-							schema: {
-								type: "object",
-								properties: {
-									all: {
-										type: "string",
-										example: "true",
-										description:
-											'Set "true" (string) to get all users, if "true" other properties are ignored',
+				responses: {
+					"200": {
+						description: "Successfully logouts.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										item_name: {
+											type: "string",
+											example: "Morning",
+										},
+										prize: {
+											type: "string",
+											example: "Meditation",
+										},
 									},
-									method: {
-										type: "string",
-										example: "id",
-										description:
-											"Choose which unique User field use for search (id | email)",
+								},
+							},
+						},
+					},
+					"401": {
+						description: "Not enough wheels | DB error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+											description: "Error description",
+										},
 									},
-									identificator: {
-										type: "string",
-										example:
-											"9e30b7de-906c-46ed-8973-a8d094b94d11",
-										description:
-											"Set email or ID (in dependency of 'method' property) of User, that you search",
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error | access issue.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description:
+												"Unable to authorize, or you haven't access.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+										},
 									},
 								},
 							},
 						},
 					},
 				},
-
+			},
+		},
+		"/api/client/data/get": {
+			get: {
+				tags: ["Client"],
+				summary: "Client_controller | Get User data.",
+				description: "Return User data.",
+				parameters: [
+					{
+						name: "Access Token",
+						in: "cookie",
+						required: true,
+						description: "Access token, to verify auth.",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+					{
+						name: "Refresh Token",
+						in: "cookie",
+						required: true,
+						description:
+							"Refresh token, to verify auth if access Token expired",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+				],
 				responses: {
 					"200": {
-						description:
-							"Successfully get Users/User from DB, send to the client.",
+						description: "Return User data.",
 						content: {
 							"application/json": {
 								schema: {
 									type: "object",
 									properties: {
-										user_id: {
+										user_name: {
 											type: "string",
-											example:
-												"9e30b7de-906c-46ed-8973-a8d094b94d11",
-											description: "Unique User's ID",
+											example: "Lavrentij",
 										},
 										user_email: {
 											type: "string",
 											example: "lavr.marudenko@gmail.com",
-											description: "Unique User's Email",
 										},
-										user_name: {
+										user_role: {
 											type: "string",
-											example: "Lavrentij",
-											description: "User's name",
-										},
-										user_password: {
-											type: "string",
-											example:
-												"aaisjdasj-asiodasjd-aksdipasjd",
-											description:
-												"User's password (encrypted)",
+											example: "ADMIN",
 										},
 										user_wheel: {
-											type: "integer",
-											example: 10,
-											description:
-												"User's tries to spin wheel",
+											type: "string",
+											example: "10",
 										},
-										user_list: {
-											type: "string[]",
-											example: ["a", "b"],
-											description: "User's check-lists",
+										user_money: {
+											type: "string",
+											example: "2500",
 										},
 										user_meditation: {
 											type: "string[]",
-											example: ["a", "b"],
-											description: "User's meditations",
+											example: ["one", "two"],
+										},
+										user_list: {
+											type: "string[]",
+											example: ["one", "two"],
+										},
+									},
+								},
+							},
+						},
+					},
+					"401": {
+						description: "DB error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error | access issue.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description:
+												"Unable to authorize, or you haven't access.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		"/api/client/promocode/verify": {
+			post: {
+				tags: ["Client"],
+				summary: "Client_controller | Verify promo.",
+				description: "Verify promocode, return prize.",
+				parameters: [
+					{
+						name: "Access Token",
+						in: "cookie",
+						required: true,
+						description: "Access token, to verify auth.",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+					{
+						name: "Refresh Token",
+						in: "cookie",
+						required: true,
+						description:
+							"Refresh token, to verify auth if access Token expired",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+				],
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								properties: {
+									promocode: {
+										type: "string",
+										example: "NdjnNdlsn",
+									},
+								},
+							},
+						},
+					},
+				},
+				responses: {
+					"200": {
+						description: "Promocode verified.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										msg: {
+											type: "string",
+											example:
+												"You've got: 'list of prizes'.",
+											description: "List of prizes.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"401": {
+						description:
+							"Invalid data sent | Promocode not found | DB error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Promocode not found.",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error | access issue.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description:
+												"Unable to authorize, or you haven't access.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		"/api/client/feedback/send": {
+			post: {
+				tags: ["Client"],
+				summary: "Client_controller | Send feedback.",
+				description: "Send feedback to admins.",
+				parameters: [
+					{
+						name: "Access Token",
+						in: "cookie",
+						required: true,
+						description: "Access token, to verify auth.",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+					{
+						name: "Refresh Token",
+						in: "cookie",
+						required: true,
+						description:
+							"Refresh token, to verify auth if access Token expired",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+				],
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								properties: {
+									msg: {
+										type: "string",
+										example: "Massage text",
+									},
+									name: {
+										type: "string",
+										example: "Lavrentij",
+									},
+								},
+							},
+						},
+					},
+				},
+				responses: {
+					"200": {
+						description: "Feedback sent.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										msg: {
+											type: "string",
+											example:
+												"Massage sent successfully, you'll receive feedback by Email.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"401": {
+						description: "Invalid data sent | DB error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Invalid data sent",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error | access issue.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description:
+												"Unable to authorize, or you haven't access.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		//====================
+		// ADMIN
+		//====================
+		// USERS
+		//change
+		"/api/admin/users/change/money/:email/:value": {
+			patch: {
+				tags: ["Admin", "Admin_users", "Admin_users_change"],
+				summary: "Admin_controller | Change User money",
+				description: "Change User money.",
+				parameters: [
+					{
+						name: "email",
+						in: "path",
+						required: true,
+						description: "User's email",
+						schema: {
+							type: "string",
+							example: "lavr.marudenko@gmail.com",
+						},
+					},
+					{
+						name: "value",
+						in: "path",
+						required: true,
+						description: "Amount of money",
+						schema: {
+							type: "number",
+							example: 1000,
+						},
+					},
+					{
+						name: "Access Token",
+						in: "cookie",
+						required: true,
+						description: "Access token, to verify auth.",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+					{
+						name: "Refresh Token",
+						in: "cookie",
+						required: true,
+						description:
+							"Refresh token, to verify auth if access Token expired",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+				],
+				responses: {
+					"200": {
+						description: "Money changed",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										msg: {
+											type: "string",
+											example:
+												"Money of ${req.params.email} changed to ${req.params.value}.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"401": {
+						description:
+							"Invalid data sent | Value should be a number | DB error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"Invalid data sent, value should be a Number.",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error | access issue.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description:
+												"Unable to authorize, or you haven't access.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		"/api/admin/users/change/wheels/:email/:value": {
+			patch: {
+				tags: ["Admin", "Admin_users", "Admin_users_change"],
+				summary: "Admin_controller | Change User wheels",
+				description: "Change User wheels.",
+				parameters: [
+					{
+						name: "email",
+						in: "path",
+						required: true,
+						description: "User's email",
+						schema: {
+							type: "string",
+							example: "lavr.marudenko@gmail.com",
+						},
+					},
+					{
+						name: "value",
+						in: "path",
+						required: true,
+						description: "Amount of wheels",
+						schema: {
+							type: "number",
+							example: 1000,
+						},
+					},
+					{
+						name: "Access Token",
+						in: "cookie",
+						required: true,
+						description: "Access token, to verify auth.",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+					{
+						name: "Refresh Token",
+						in: "cookie",
+						required: true,
+						description:
+							"Refresh token, to verify auth if access Token expired",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+				],
+				responses: {
+					"200": {
+						description: "Wheels changed",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										msg: {
+											type: "string",
+											example:
+												"Wheels of ${req.params.email} changed to ${req.params.value}.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"401": {
+						description:
+							"Invalid data sent | Value should be a number | DB error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"Invalid data sent, value should be a Number.",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error | access issue.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description:
+												"Unable to authorize, or you haven't access.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		"/api/admin/users/change/role/:email/:value": {
+			patch: {
+				tags: ["Admin", "Admin_users", "Admin_users_change"],
+				summary: "Admin_controller | Change User role",
+				description: "Change User role.",
+				parameters: [
+					{
+						name: "email",
+						in: "path",
+						required: true,
+						description: "User's email",
+						schema: {
+							type: "string",
+							example: "lavr.marudenko@gmail.com",
+						},
+					},
+					{
+						name: "value",
+						in: "path",
+						required: true,
+						description: "New role",
+						schema: {
+							type: "string",
+							example: "ADMIN",
+						},
+					},
+					{
+						name: "Access Token",
+						in: "cookie",
+						required: true,
+						description: "Access token, to verify auth.",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+					{
+						name: "Refresh Token",
+						in: "cookie",
+						required: true,
+						description:
+							"Refresh token, to verify auth if access Token expired",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+				],
+				responses: {
+					"200": {
+						description: "Role changed",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										msg: {
+											type: "string",
+											example:
+												"Role of ${req.params.email} changed to ${req.params.value}.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"401": {
+						description:
+							"Invalid data sent | should be a valid role | DB error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Invalid data sent",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error | access issue.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description:
+												"Unable to authorize, or you haven't access.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		"/api/admin/users/change/meditations/:email/:method/:value": {
+			patch: {
+				tags: ["Admin", "Admin_users", "Admin_users_change"],
+				summary: "Admin_controller | Change User meditations",
+				description: "Change User meditations.",
+				parameters: [
+					{
+						name: "email",
+						in: "path",
+						required: true,
+						description: "User's email",
+						schema: {
+							type: "string",
+							example: "lavr.marudenko@gmail.com",
+						},
+					},
+					{
+						name: "value",
+						in: "path",
+						required: true,
+						description: "Name of product",
+						schema: {
+							type: "string",
+							example: "morning",
+						},
+					},
+					{
+						name: "method",
+						in: "path",
+						required: true,
+						description: "Add/delete product",
+						schema: {
+							type: "string",
+							example: "add",
+						},
+					},
+					{
+						name: "Access Token",
+						in: "cookie",
+						required: true,
+						description: "Access token, to verify auth.",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+					{
+						name: "Refresh Token",
+						in: "cookie",
+						required: true,
+						description:
+							"Refresh token, to verify auth if access Token expired",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+				],
+				responses: {
+					"200": {
+						description: "Meditation added/deleted.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										msg: {
+											type: "string",
+											example:
+												"Meditation ${req.params.value} added successfully.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"401": {
+						description:
+							"Invalid data sent | should be delete/add | DB error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"Invalid data sent, method should be delete || add.",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error | access issue.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description:
+												"Unable to authorize, or you haven't access.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		"/api/admin/users/change/lists/:email/:method/:value": {
+			patch: {
+				tags: ["Admin", "Admin_users", "Admin_users_change"],
+				summary: "Admin_controller | Change User lists",
+				description: "Change User lists.",
+				parameters: [
+					{
+						name: "email",
+						in: "path",
+						required: true,
+						description: "User's email",
+						schema: {
+							type: "string",
+							example: "lavr.marudenko@gmail.com",
+						},
+					},
+					{
+						name: "value",
+						in: "path",
+						required: true,
+						description: "Name of product",
+						schema: {
+							type: "string",
+							example: "morning",
+						},
+					},
+					{
+						name: "method",
+						in: "path",
+						required: true,
+						description: "Add/delete product",
+						schema: {
+							type: "string",
+							example: "add",
+						},
+					},
+					{
+						name: "Access Token",
+						in: "cookie",
+						required: true,
+						description: "Access token, to verify auth.",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+					{
+						name: "Refresh Token",
+						in: "cookie",
+						required: true,
+						description:
+							"Refresh token, to verify auth if access Token expired",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+				],
+				responses: {
+					"200": {
+						description: "List added/deleted.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										msg: {
+											type: "string",
+											example:
+												"List ${req.params.value} added successfully.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"401": {
+						description:
+							"Invalid data sent | should be delete/add | DB error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"Invalid data sent, method should be delete || add.",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error | access issue.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description:
+												"Unable to authorize, or you haven't access.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		//add\delete
+		"/api/admin/users/add": {
+			put: {
+				tags: ["Admin", "Admin_users"],
+				summary: "Admin_controller | Add User",
+				description: "Add new User.",
+				parameters: [
+					{
+						name: "Access Token",
+						in: "cookie",
+						required: true,
+						description: "Access token, to verify auth.",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+					{
+						name: "Refresh Token",
+						in: "cookie",
+						required: true,
+						description:
+							"Refresh token, to verify auth if access Token expired",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+				],
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								properties: {
+									email: {
+										type: "string",
+										example: "lavr.marudenko@gmail.com",
+										description: "User email.",
+									},
+									password: {
+										type: "string",
+										example: "pass1234",
+										description: "User password.",
+									},
+									name: {
+										type: "string",
+										example: "Lavrentij",
+										description: "User name.",
+									},
+								},
+							},
+						},
+					},
+				},
+				responses: {
+					"200": {
+						description: "User added.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										msg: {
+											type: "string",
+											example:
+												"User ${req.body.name} created.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"401": {
+						description:
+							"Invalid data sent | Email already used | DB error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "This Email already used.",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error | access issue.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description:
+												"Unable to authorize, or you haven't access.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		"/api/admin/users/delete/:email": {
+			delete: {
+				tags: ["Admin", "Admin_users"],
+				summary: "Admin_controller | Delete User",
+				description: "Delete User.",
+				parameters: [
+					{
+						name: "email",
+						in: "path",
+						required: true,
+						description: "User's email",
+						schema: {
+							type: "string",
+							example: "lavr.marudenko@gmail.com",
+						},
+					},
+					{
+						name: "Access Token",
+						in: "cookie",
+						required: true,
+						description: "Access token, to verify auth.",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+					{
+						name: "Refresh Token",
+						in: "cookie",
+						required: true,
+						description:
+							"Refresh token, to verify auth if access Token expired",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+				],
+				responses: {
+					"200": {
+						description: "User deleted.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										msg: {
+											type: "string",
+											example:
+												"User ${req.params.email} deleted.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"401": {
+						description: "Invalid data sent | DB error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Invalid data sent.",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error | access issue.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description:
+												"Unable to authorize, or you haven't access.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		//get
+		"/api/admin/users/get/all": {
+			get: {
+				tags: ["Admin", "Admin_users"],
+				summary: "Admin_controller | Get all Users",
+				description: "Get array of all Users.",
+				parameters: [
+					{
+						name: "Access Token",
+						in: "cookie",
+						required: true,
+						description: "Access token, to verify auth.",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+					{
+						name: "Refresh Token",
+						in: "cookie",
+						required: true,
+						description:
+							"Refresh token, to verify auth if access Token expired",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+				],
+				responses: {
+					"200": {
+						description: "Users returned to client.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "string[]",
+								},
+							},
+						},
+					},
+					"401": {
+						description: "Invalid data sent | DB error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Invalid data sent.",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error | access issue.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description:
+												"Unable to authorize, or you haven't access.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		"/api/admin/users/get/one/:email": {
+			get: {
+				tags: ["Admin", "Admin_users"],
+				summary: "Admin_controller | Get User",
+				description: "Get User.",
+				parameters: [
+					{
+						name: "email",
+						in: "path",
+						required: true,
+						description: "User's email",
+						schema: {
+							type: "string",
+							example: "lavr.marudenko@gmail.com",
+						},
+					},
+					{
+						name: "Access Token",
+						in: "cookie",
+						required: true,
+						description: "Access token, to verify auth.",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+					{
+						name: "Refresh Token",
+						in: "cookie",
+						required: true,
+						description:
+							"Refresh token, to verify auth if access Token expired",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+				],
+				responses: {
+					"200": {
+						description: "User returned to client.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										user_name: {
+											type: "string",
+											example: "Lavrentij",
+										},
+										user_email: {
+											type: "string",
+											example: "lavr.marudenko@gmail.com",
+										},
+										user_role: {
+											type: "string",
+											example: "ADMIN",
+										},
+										user_wheel: {
+											type: "string",
+											example: "10",
 										},
 										user_money: {
-											type: "integer",
-											example: 1500,
-											description: "User's money",
+											type: "string",
+											example: "2500",
+										},
+										user_meditation: {
+											type: "string[]",
+											example: ["one", "two"],
+										},
+										user_list: {
+											type: "string[]",
+											example: ["one", "two"],
 										},
 									},
 								},
@@ -714,7 +1780,7 @@ export const swagger_config: OpenAPIObject = {
 						},
 					},
 					"401": {
-						description: "Request body error, invalid data sent.",
+						description: "Invalid data sent | DB error.",
 						content: {
 							"application/json": {
 								schema: {
@@ -722,7 +1788,7 @@ export const swagger_config: OpenAPIObject = {
 									properties: {
 										error: {
 											type: "string",
-											example: "Error description text",
+											example: "Invalid data sent.",
 											description: "Error description",
 										},
 									},
@@ -731,7 +1797,7 @@ export const swagger_config: OpenAPIObject = {
 						},
 					},
 					"403": {
-						description: "Auth error",
+						description: "Auth error | access issue.",
 						content: {
 							"application/json": {
 								schema: {
@@ -741,7 +1807,8 @@ export const swagger_config: OpenAPIObject = {
 											type: "string",
 											example:
 												"You're token expired or replaced, please authorize again!",
-											description: "Unable to authorize",
+											description:
+												"Unable to authorize, or you haven't access.",
 										},
 									},
 								},
@@ -758,7 +1825,6 @@ export const swagger_config: OpenAPIObject = {
 										error: {
 											type: "string",
 											example: "Error description text",
-											description: "Error description",
 										},
 									},
 								},
@@ -767,13 +1833,14 @@ export const swagger_config: OpenAPIObject = {
 					},
 				},
 			},
-		}, //
-
-		"/api/admin/change_product": {
-			post: {
-				summary:
-					"Admin_controller | Change User products (Check-lists, meditations).",
-				description: "Change User products (Check-lists, meditations)",
+		},
+		//
+		// FEEDBACK
+		"/api/client/feedback/get/unread": {
+			get: {
+				tags: ["Admin", "Admin_feedback"],
+				summary: "Admin_controller | Get unread messages",
+				description: "Get unread messages.",
 				parameters: [
 					{
 						name: "Access Token",
@@ -790,339 +1857,1182 @@ export const swagger_config: OpenAPIObject = {
 						name: "Refresh Token",
 						in: "cookie",
 						required: true,
-						description: "Refresh token, to verify auth.",
-						schema: {
-							type: "string",
-							example:
-								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-						},
-					},
-				],
-
-				requestBody: {
-					required: true,
-					content: {
-						"application/json": {
-							schema: {
-								type: "object",
-								properties: {
-									method: {
-										type: "string",
-										example: "id",
-										description:
-											"Choose which unique User field use for search (id | email)",
-									},
-									identificator: {
-										type: "string",
-										example:
-											"9e30b7de-906c-46ed-8973-a8d094b94d11",
-										description:
-											"Set email or ID (in dependency of 'method' property) of User, that you search",
-									},
-									type: {
-										example: "meditation",
-										type: "string",
-										description:
-											"Choose which User product change",
-									},
-									value: {
-										example: "meditation_name",
-										type: "string",
-										description:
-											"Adds/deletes products to User",
-									},
-									move: {
-										example: "delete",
-										type: "string",
-										description:
-											"Choose to Adds/Deletes product",
-									},
-								},
-							},
-						},
-					},
-				},
-
-				responses: {
-					"200": {
-						description: "Successfully change User product",
-						content: {
-							"application/json": {
-								schema: {
-									type: "object",
-									properties: {
-										msg: {
-											type: "string",
-											example:
-												"Item product name deletes successfully.",
-											description: "Message with info",
-										},
-									},
-								},
-							},
-						},
-					},
-					"401": {
-						description: "Request body error, invalid data sent.",
-						content: {
-							"application/json": {
-								schema: {
-									type: "object",
-									properties: {
-										error: {
-											type: "string",
-											example: "Error description text",
-											description: "Error description",
-										},
-									},
-								},
-							},
-						},
-					},
-					"403": {
-						description: "Auth error",
-						content: {
-							"application/json": {
-								schema: {
-									type: "object",
-									properties: {
-										error: {
-											type: "string",
-											example:
-												"You're token expired or replaced, please authorize again!",
-											description: "Unable to authorize",
-										},
-									},
-								},
-							},
-						},
-					},
-					"500": {
-						description: "Internal server error.",
-						content: {
-							"application/json": {
-								schema: {
-									type: "object",
-									properties: {
-										error: {
-											type: "string",
-											example: "Error description text",
-											description: "Error description",
-										},
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		}, //
-
-		"/api/admin/change_data": {
-			post: {
-				summary:
-					"Admin_controller | Change User data (Role, money, wheels).",
-				description: "Change User data (Role, money, wheels).",
-				parameters: [
-					{
-						name: "Access Token",
-						in: "cookie",
-						required: true,
-						description: "Access token, to verify auth.",
-						schema: {
-							type: "string",
-							example:
-								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-						},
-					},
-					{
-						name: "Refresh Token",
-						in: "cookie",
-						required: true,
-						description: "Refresh token, to verify auth.",
-						schema: {
-							type: "string",
-							example:
-								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-						},
-					},
-				],
-
-				requestBody: {
-					required: true,
-					content: {
-						"application/json": {
-							schema: {
-								type: "object",
-								properties: {
-									method: {
-										type: "string",
-										example: "id",
-										description:
-											"Choose which unique User field use for search (id | email)",
-									},
-									identificator: {
-										type: "string",
-										example:
-											"9e30b7de-906c-46ed-8973-a8d094b94d11",
-										description:
-											"Set email or ID (in dependency of 'method' property) of User, that you search",
-									},
-									type: {
-										example: "role",
-										type: "string",
-										description:
-											"Choose which User parameter change",
-									},
-									value: {
-										example: "ADMIN",
-										type: "string",
-										description:
-											"New value of changing parameter",
-									},
-								},
-							},
-						},
-					},
-				},
-
-				responses: {
-					"200": {
-						description: "Successfully change User parameter",
-						content: {
-							"application/json": {
-								schema: {
-									type: "object",
-									properties: {
-										msg: {
-											type: "string",
-											example:
-												"Parameter_name changed to New_value",
-											description: "Message with info",
-										},
-									},
-								},
-							},
-						},
-					},
-					"401": {
-						description: "Request body error, invalid data sent.",
-						content: {
-							"application/json": {
-								schema: {
-									type: "object",
-									properties: {
-										error: {
-											type: "string",
-											example: "Error description text",
-											description: "Error description",
-										},
-									},
-								},
-							},
-						},
-					},
-					"403": {
-						description: "Auth error",
-						content: {
-							"application/json": {
-								schema: {
-									type: "object",
-									properties: {
-										error: {
-											type: "string",
-											example:
-												"You're token expired or replaced, please authorize again!",
-											description: "Unable to authorize",
-										},
-									},
-								},
-							},
-						},
-					},
-					"500": {
-						description: "Internal server error.",
-						content: {
-							"application/json": {
-								schema: {
-									type: "object",
-									properties: {
-										error: {
-											type: "string",
-											example: "Error description text",
-											description: "Error description",
-										},
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		}, //
-
-		"/api/admin/edit": {
-			post: {
-				summary: "Client_controller | Spins the 'wheel'.",
-				description:
-					"Spins the 'wheel' and return 'prize' to the client, update User data.",
-				parameters: [
-					{
-						name: "Access Token",
-						in: "cookie",
-						required: true,
-						description: "Access token, to verify auth.",
-						schema: {
-							type: "string",
-							example:
-								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-						},
-					},
-					{
-						name: "Refresh Token",
-						in: "cookie",
-						required: true,
-						description: "Refresh token, to verify auth.",
-						schema: {
-							type: "string",
-							example:
-								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-						},
-					},
-				],
-
-				requestBody: {
-					required: true,
-					content: {
-						"application/json": {
-							schema: {
-								type: "object",
-								properties: {
-									username: {
-										type: "string",
-									},
-								},
-							},
-						},
-					},
-				},
-
-				responses: {
-					"200": {
 						description:
-							"Successfully spins the 'wheel' and return 'prize' to the client, successfully write result to DB",
+							"Refresh token, to verify auth if access Token expired",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+				],
+				responses: {
+					"200": {
+						description: "Messages returned to client.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "string[]",
+								},
+							},
+						},
+					},
+					"401": {
+						description: "Invalid data sent | DB error.",
 						content: {
 							"application/json": {
 								schema: {
 									type: "object",
 									properties: {
-										id: {
-											type: "integer",
-											example: 4,
-										},
-										name: {
+										error: {
 											type: "string",
-											example: "Jessica Smith",
+											example: "Invalid data sent.",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error | access issue.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description:
+												"Unable to authorize, or you haven't access.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		"/api/client/send/read/one/:id": {
+			patch: {
+				tags: ["Admin", "Admin_feedback"],
+				summary: "Admin_controller | Read message",
+				description: "Read message.",
+				parameters: [
+					{
+						name: "id",
+						in: "path",
+						required: true,
+						description: "message's id",
+						schema: {
+							type: "number",
+							example: 24,
+						},
+					},
+					{
+						name: "Access Token",
+						in: "cookie",
+						required: true,
+						description: "Access token, to verify auth.",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+					{
+						name: "Refresh Token",
+						in: "cookie",
+						required: true,
+						description:
+							"Refresh token, to verify auth if access Token expired",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+				],
+				responses: {
+					"200": {
+						description: "Message status changed to 'read'.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										msg: {
+											type: "string",
+											example:
+												"Message id${req.params.id} read",
+										},
+									},
+								},
+							},
+						},
+					},
+					"401": {
+						description: "Invalid data sent | DB error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Invalid data sent.",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error | access issue.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description:
+												"Unable to authorize, or you haven't access.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		"/api/client/feedback/read/all": {
+			patch: {
+				tags: ["Admin", "Admin_feedback"],
+				summary: "Admin_controller | Read all messages",
+				description: "Read all messages.",
+				parameters: [
+					{
+						name: "Access Token",
+						in: "cookie",
+						required: true,
+						description: "Access token, to verify auth.",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+					{
+						name: "Refresh Token",
+						in: "cookie",
+						required: true,
+						description:
+							"Refresh token, to verify auth if access Token expired",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+				],
+				responses: {
+					"200": {
+						description: "All messages status changed to 'read'.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										msg: {
+											type: "string",
+											example: "All messages read",
+										},
+									},
+								},
+							},
+						},
+					},
+					"401": {
+						description: "Invalid data sent | DB error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Invalid data sent.",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error | access issue.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description:
+												"Unable to authorize, or you haven't access.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		//
+		// PROMOCODES
+		"/api/admin/promocodes/get": {
+			get: {
+				tags: ["Admin", "Admin_promocodes"],
+				summary: "Admin_controller | Get all promocodes",
+				description: "Get all promocodes.",
+				parameters: [
+					{
+						name: "Access Token",
+						in: "cookie",
+						required: true,
+						description: "Access token, to verify auth.",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+					{
+						name: "Refresh Token",
+						in: "cookie",
+						required: true,
+						description:
+							"Refresh token, to verify auth if access Token expired",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+				],
+				responses: {
+					"200": {
+						description: "Promocodes returned to client.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "string[]",
+								},
+							},
+						},
+					},
+					"401": {
+						description: "Invalid data sent | DB error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Invalid data sent.",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error | access issue.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description:
+												"Unable to authorize, or you haven't access.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		"/api/admin/promocodes/add": {
+			put: {
+				tags: ["Admin", "Admin_promocodes"],
+				summary: "Admin_controller | Add new promocode",
+				description: "Add new promocode.",
+				parameters: [
+					{
+						name: "Access Token",
+						in: "cookie",
+						required: true,
+						description: "Access token, to verify auth.",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+					{
+						name: "Refresh Token",
+						in: "cookie",
+						required: true,
+						description:
+							"Refresh token, to verify auth if access Token expired",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+				],
+				requestBody: {
+					required: true,
+					content: {
+						"application/json": {
+							schema: {
+								type: "object",
+								properties: {
+									give: {
+										type: "string",
+										example: "money",
+										description: "Type of prize.",
+									},
+									promo: {
+										type: "string",
+										example: "nsdcnsdds",
+										description: "New promocode.",
+									},
+									value: {
+										type: "string",
+										example: "1000",
+										description: "Value of prize.",
+									},
+								},
+							},
+						},
+					},
+				},
+				responses: {
+					"200": {
+						description: "Promocode created.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										msg: {
+											type: "string",
+											example:
+												"Promocode ${req.body.promo} created successfully.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"401": {
+						description:
+							"Invalid data sent | should be a Number | DB error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "This Email already used.",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error | access issue.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description:
+												"Unable to authorize, or you haven't access.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		"/api/admin/promocodes/delete/:promo": {
+			delete: {
+				tags: ["Admin", "Admin_promocodes"],
+				summary: "Admin_controller | Delete promocode",
+				description: "Delete promocode.",
+				parameters: [
+					{
+						name: "promo",
+						in: "path",
+						required: true,
+						description: "Promo to delete",
+						schema: {
+							type: "string",
+							example: "sadhdsd",
+						},
+					},
+					{
+						name: "Access Token",
+						in: "cookie",
+						required: true,
+						description: "Access token, to verify auth.",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+					{
+						name: "Refresh Token",
+						in: "cookie",
+						required: true,
+						description:
+							"Refresh token, to verify auth if access Token expired",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+				],
+				responses: {
+					"200": {
+						description: "Promocode deleted.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										msg: {
+											type: "string",
+											example:
+												"Promocode ${req.params.promo} deleted.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"401": {
+						description: "Invalid data sent | DB error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Invalid data sent.",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error | access issue.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description:
+												"Unable to authorize, or you haven't access.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		//
+		// PRODUCTS
+		//add
+		"/api/admin/products/add/meditation/:name": {
+			put: {
+				tags: ["Admin", "Admin_products"],
+				summary: "Admin_controller | Add new meditation",
+				description: "Add new meditation.",
+				parameters: [
+					{
+						name: "name",
+						in: "path",
+						required: true,
+						description: "Meditation name to add",
+						schema: {
+							type: "string",
+							example: "morning",
+						},
+					},
+					{
+						name: "Access Token",
+						in: "cookie",
+						required: true,
+						description: "Access token, to verify auth.",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+					{
+						name: "Refresh Token",
+						in: "cookie",
+						required: true,
+						description:
+							"Refresh token, to verify auth if access Token expired",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+				],
+				responses: {
+					"200": {
+						description: "Meditation added.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										msg: {
+											type: "string",
+											example:
+												"Meditation ${req.body.name} added.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"401": {
+						description: "Invalid data sent | DB error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "This Email already used.",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error | access issue.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description:
+												"Unable to authorize, or you haven't access.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		"/api/admin/products/add/list/:name": {
+			put: {
+				tags: ["Admin", "Admin_products"],
+				summary: "Admin_controller | Add new list",
+				description: "Add new list.",
+				parameters: [
+					{
+						name: "name",
+						in: "path",
+						required: true,
+						description: "List name to add",
+						schema: {
+							type: "string",
+							example: "morning",
+						},
+					},
+					{
+						name: "Access Token",
+						in: "cookie",
+						required: true,
+						description: "Access token, to verify auth.",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+					{
+						name: "Refresh Token",
+						in: "cookie",
+						required: true,
+						description:
+							"Refresh token, to verify auth if access Token expired",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+				],
+				responses: {
+					"200": {
+						description: "List added.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										msg: {
+											type: "string",
+											example:
+												"List ${req.body.name} added.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"401": {
+						description: "Invalid data sent | DB error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "This Email already used.",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error | access issue.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description:
+												"Unable to authorize, or you haven't access.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		//delete
+		"/api/admin/products/delete/meditation/:name": {
+			delete: {
+				tags: ["Admin", "Admin_products"],
+				summary: "Admin_controller | Delete meditation",
+				description: "Delete meditation.",
+				parameters: [
+					{
+						name: "name",
+						in: "path",
+						required: true,
+						description: "Meditation name to delete",
+						schema: {
+							type: "string",
+							example: "morning",
+						},
+					},
+					{
+						name: "Access Token",
+						in: "cookie",
+						required: true,
+						description: "Access token, to verify auth.",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+					{
+						name: "Refresh Token",
+						in: "cookie",
+						required: true,
+						description:
+							"Refresh token, to verify auth if access Token expired",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+				],
+				responses: {
+					"200": {
+						description: "Meditation deleted.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										msg: {
+											type: "string",
+											example:
+												"Meditation ${req.params.name} deleted.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"401": {
+						description: "Invalid data sent | DB error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Invalid data sent.",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error | access issue.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description:
+												"Unable to authorize, or you haven't access.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		"/api/admin/products/delete/list/:name": {
+			delete: {
+				tags: ["Admin", "Admin_products"],
+				summary: "Admin_controller | Delete list",
+				description: "Delete list.",
+				parameters: [
+					{
+						name: "name",
+						in: "path",
+						required: true,
+						description: "List name to delete",
+						schema: {
+							type: "string",
+							example: "morning",
+						},
+					},
+					{
+						name: "Access Token",
+						in: "cookie",
+						required: true,
+						description: "Access token, to verify auth.",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+					{
+						name: "Refresh Token",
+						in: "cookie",
+						required: true,
+						description:
+							"Refresh token, to verify auth if access Token expired",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+				],
+				responses: {
+					"200": {
+						description: "List deleted.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										msg: {
+											type: "string",
+											example:
+												"List ${req.params.name} deleted.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"401": {
+						description: "Invalid data sent | DB error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Invalid data sent.",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error | access issue.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description:
+												"Unable to authorize, or you haven't access.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		//get
+		"/api/admin/products/get": {
+			get: {
+				tags: ["Admin", "Admin_products"],
+				summary: "Admin_controller | Get all products",
+				description: "Get all products.",
+				parameters: [
+					{
+						name: "Access Token",
+						in: "cookie",
+						required: true,
+						description: "Access token, to verify auth.",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+					{
+						name: "Refresh Token",
+						in: "cookie",
+						required: true,
+						description:
+							"Refresh token, to verify auth if access Token expired",
+						schema: {
+							type: "string",
+							example:
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+						},
+					},
+				],
+				responses: {
+					"200": {
+						description: "Products returned to client.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "string[]",
+								},
+							},
+						},
+					},
+					"401": {
+						description: "Invalid data sent | DB error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Invalid data sent.",
+											description: "Error description",
+										},
+									},
+								},
+							},
+						},
+					},
+					"403": {
+						description: "Auth error | access issue.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example:
+												"You're token expired or replaced, please authorize again!",
+											description:
+												"Unable to authorize, or you haven't access.",
+										},
+									},
+								},
+							},
+						},
+					},
+					"500": {
+						description: "Internal server error.",
+						content: {
+							"application/json": {
+								schema: {
+									type: "object",
+									properties: {
+										error: {
+											type: "string",
+											example: "Error description text",
 										},
 									},
 								},

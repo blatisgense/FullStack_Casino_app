@@ -5,15 +5,28 @@ import { Request, Response } from "express";
 
 export const login = async (req: Request, res: Response) => {
 	try {
+		if (!req.body.email || !req.body.password){
+			return res.status(401).json({
+				error: `Invalid data sent, check request.body.`,
+			});
+		}
+
 		const email = req.body.email;
 		const password = req.body.password;
 		const users = await pool.query(
 			`SELECT * FROM Users WHERE user_email = $1`,
 			[email],
 		);
+
+		if (users.error) {
+			return res.status(401).json({
+				error: users.error,
+			});
+		}
+
 		if (users.rows.length === 0) {
 			return res.status(401).json({
-				error: "User not found, maybe Email is incorrect, please try again.",
+				error: "User not found, please try again.",
 			});
 		}
 
@@ -38,7 +51,7 @@ export const login = async (req: Request, res: Response) => {
 			sameSite: "none",
 			secure: true,
 		});
-		return res.status(200).json({ msg: "You've logged in successfully" });
+		return res.status(200).json({ msg: "You've logged in successfully." });
 	} catch (error) {
 		console.log(error);
 		return res.status(500).json({ error: error.message });

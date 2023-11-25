@@ -2,19 +2,30 @@
 import { Controller, Get, Post, Req, Res } from "@nestjs/common";
 import { APIS } from "../config/API";
 import { Response } from "express";
-//services
-import { spin_wheel } from "../services/client/spin_wheel";
-import { promocode_check } from "../services/client/promocode_check";
 import { Request_user } from "../config/types";
+
+//services
+import { spin } from "../services/client/wheel/spin";
+import { verify } from "../services/client/promocode/verify";
+import { get } from "../services/client/data/get";
+import { send } from "../services/client/feedback/send";
 
 @Controller()
 export class Client_Controller {
-	@Get(APIS.spin)
+	@Get(APIS.client.wheel.spin.url)
 	async Spin_wheel(@Req() req: Request_user, @Res() res: Response) {
-		await spin_wheel(req, res);
+		await spin(req, res);
 	}
-	@Post(APIS.verify_promo)
+	@Get(APIS.client.data.get.url)
+	async Get_data(@Req() req: Request_user, @Res() res: Response) {
+		await get(req, res);
+	}
+	@Post(APIS.client.promocode.verify.url)
 	async Promocode_check(@Req() req: Request_user, @Res() res: Response) {
-		await promocode_check(req, res);
+		await verify(req, res);
+	}
+	@Post(APIS.client.feedback.send.url)
+	async Feedback_send(@Req() req: Request_user, @Res() res: Response) {
+		await send(req, res);
 	}
 }

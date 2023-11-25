@@ -1,12 +1,12 @@
 {
   "name": "backend_nest",
   "version": "1.0.0",
-  "description": "",
-  "author": "",
+  "description": "Back-end of 'Magic wheel'",
+  "author": "Blatisgense",
   "license": "MIT",
   "scripts": {
     "start": "nest start --watch",
-    "test": "mocha --require ts-node/register --ui bdd 'tests/**/*.ts' --exit",
+    "test": "mocha --require ts-node/register --ui bdd 'tests/**/*.test.ts' --exit",
     "build": "nest build",
     "format": "prettier --write src/**/*.ts tests/**/*.ts",
     "lint-fix": "eslint --fix src/**/*.{js,ts,json} tests/**/*.ts"

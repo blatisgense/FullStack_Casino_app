@@ -7,7 +7,7 @@ export const registration = async (req: Request, res: Response) => {
 	try {
 		if (!req.body.name || !req.body.email || !req.body.password) {
 			return res.status(401).json({
-				error: `Not enough parameters, check request.body.`,
+				error: `Invalid data sent, check request.body.`,
 			});
 		}
 
