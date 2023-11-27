@@ -4,10 +4,10 @@ frontend_vue
 readme's
 LICENSE
 archve
-backend_Ts/node_modules
-backend_Ts/.env
-backend_Ts/package-lock.json
+backend/node_modules
+backend/.env
+backend/package-lock.json
 .idea
 README.md
 train.js
-backend_Ts/dist
+backend/dist

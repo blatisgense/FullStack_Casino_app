@@ -1,6 +1,20 @@
 <div class="block">
     <h1 class="h1">Hello, I'm Front-end developer Lavrentij</h1>
     <h2 class="h2" style="max-width: 400px; text-align: center; margin-top: 15px;">This is my pet project witch idea based on commercial order.</h2>
+    <p class="p2" style="margin-top: 20px;">App concept: <br>
+    We have accounts that authentication occurs using JWT tokens, that stored in Cookies.<br>
+    Account have fields:
+    <br> - id (unique id),
+    <br> - email (unique email, used for operation with an account and registration),
+    <br> - name (name chosen during registration),
+    <br> - password (password chosen during registration, stored in DB encrypted),
+    <br> - money (amount of fictional money),
+    <br> - wheels (tries for spin <b><i>Magic wheel</i></b>),
+    <br> - role (USER or ADMIN, only admin have access to an admin panel),
+    <br> - lists and meditations (some kind of prize, it can be an audio file, but it doesn't exist).
+    <br>In original App lists, meditations and money could be received by writing to the administration (by built-in feedback sender).
+    <br>Users won prizes by using Promocodes and spinning <b><i>Magic wheel</i></b>.
+    <br>Tries for spins and promocodes were purchased from the administration.</p>
     <p class="p1">Navigation:</p>
     <ul class="ul">
         <li>
@@ -15,17 +29,17 @@
                     <ul>
                         <li><a href="#" class="li3">Database</a></li>
                         <li><a href="#" class="li3">Environment</a></li>
-                        <li><a href="#" class="li3">Services</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="#" class="li2">Inside code</a>
                     <ul>
                         <li><a href="#" class="li3">Connect database</a></li>
-                        <li><a href="#" class="li3">Configuration</a></li>
                         <li><a href="#" class="li3">Controllers</a></li>
                         <li><a href="#" class="li3">Services</a></li>
                         <li><a href="#" class="li3">Middleware</a></li>
+                        <li><a href="#" class="li3">Configuration</a></li>
+                        <li><a href="#" class="li3">Testing</a></li>
                         <li><a href="#" class="li3">Swagger</a></li>
                     </ul>
                 </li>
@@ -55,7 +69,7 @@
                     <br> - Required Typescript
                     <br> - Built-in Express integration
                     <br> - Powerful CLI
-                    <br> - Created for both Monoliths and Microservices
+                    <br> - Can be used for both Monoliths and Microservices
                     <br> - well-organized structure (controllers, services, guards and repositories in specific locations and in a specific manner)
                     <br> - Syntax's 'sugar' like decorators
                     <br> - OpenSource
@@ -66,16 +80,17 @@
             <h3 class="h3">Setup for running</h3>
             <div class="h3_div">
                 <h4 class="h4">Database</h4>
+                <p class="p2">You can find file <i><b>backend/src/database/db.sql</b></i> with SQL queries for creating a database, firstly we need to create DB:</p>
+<code>CREATE DATABASE NEST_VUE;</code>
+                <p>Then define extension for generate IDs</p>
+<code>CREATE EXTENSION IF NOT EXISTS "uuid-ossp";</code>
+                <p>When DB is ready for creating Tables, copy commands from <i><b>db.sql</b></i>, eventually we have four tables: (<i>Users</i>, <i>Promocodes</i>, <i>Products</i>, <i>Feedback</i>).</p>
+                <h4 class="h4">Environment</h4>
                 <p class="p2"></p>
-                <code>
-                    let a = b;
-                </code>
             </div>
         </div>
         <div id="backend_about_code">
             <h3 class="h3">Inside code</h3>
-            <h4 class="h4">Database</h4>
-            <p class="p2"></p>
         </div>
         <div id="backend_running">
             <h3 class="h3">Running app</h3>
