@@ -79,6 +79,7 @@
         <div id="backend_setup">
             <h3 class="h3">Setup for running</h3>
             <div class="h3_div">
+                <p class="p2">It is assumed that the necessary software is already installed on your computer (NodeJS, NPM, PostgresQl) and dependencies from <a href="backend/package.json" class="link"><b><i>backend/package.json</i></b></a> installed by <code>npm install</code>.</p>
                 <h4 class="h4">Database</h4>
                 <p class="p2">You can find file <i><b>backend/src/database/db.sql</b></i> with SQL queries for creating a database, firstly we need to create DB:</p>
 <code>CREATE DATABASE NEST_VUE;</code>
@@ -86,7 +87,10 @@
 <code>CREATE EXTENSION IF NOT EXISTS "uuid-ossp";</code>
                 <p>When DB is ready for creating Tables, copy commands from <i><b>db.sql</b></i>, eventually we have four tables: (<i>Users</i>, <i>Promocodes</i>, <i>Products</i>, <i>Feedback</i>).</p>
                 <h4 class="h4">Environment</h4>
-                <p class="p2"></p>
+                <p class="p2">You need to create <b><i>.env</i></b> file in directory <b><i>backend/</i></b>. Then put here <i>environment variables</i> if format:</p>
+<code>VAR_NAME=VAR_VALUE</code>
+                <p class="p2">Each new variable is written on a new line, without special characters between them. In our App we need these variables:</p>
+                <img src="docs_media/env.png" alt=".env variables">
             </div>
         </div>
         <div id="backend_about_code">
