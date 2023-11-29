@@ -244,7 +244,7 @@ import { role_check } from "./middleware/role_check";
 import { APIS } from "./config/API";
 <b>//NestJs parameter</b>
 import { RequestMethod } from "@nestjs/common";
-
+<b>//consumer function</b>
 export const middlewareConsumer = (consumer) => {
 	consumer.apply(auth_middle, role_check(["ADMIN"])).forRoutes(
 		{
@@ -260,7 +260,7 @@ export const middlewareConsumer = (consumer) => {
 import { MiddlewareConsumer, NestModule } from "@nestjs/common";
 <b>//middleware config</b>
 import { middlewareConsumer } from "./middleware.consumer";
-
+<b>//Nest app module</b>
 export class AppModule implements NestModule {
 	configure(consumer: MiddlewareConsumer) {
 		middlewareConsumer(consumer);
