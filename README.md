@@ -185,7 +185,7 @@ export class Admin_Controller {
 }
 </pre>
                 <p class="p2">Then controllers imported to <a href="backend/src/app.module.ts" class="link">app.module.ts</a></p>
-<pre>
+                <pre>
 @Module({
     controllers: [
         Client_Controller,
@@ -193,11 +193,13 @@ export class Admin_Controller {
         Auth_Controller
     ],
 })
-</pre>
+                </pre>
                 </div>
                 <h4 class="h4" id="backend_services">Services</h4>
                 <div>
-                    <p class="p2">Service is a function that takes Request and Response. After processing the request, sends the Response data (status code, json, set cookies). <br> Example (service return User by email, received as path parameter):</p>
+                    <p class="p2">
+                        Service is a function that takes Request and Response. After processing the request, sends the Response data (status code, json, set cookies). <br> Example (service return User by email, received as path parameter):
+                    </p>
 <pre>
 // pool object for DB query
 import { pool } from "../../../../database/db";
@@ -275,7 +277,8 @@ export class AppModule implements NestModule {
                 </div>
                 <h4 class="h4" id="backend_swagger">Swagger</h4>
                 <div>
-                    <p class="p2">All API have Swagger documentation in <a href="backend/src/swagger_config.ts" class="link">swagger_config.ts</a> at <br> <pre>api/swagger</pre>.<br> Swagger setups in main.ts:</p>
+                    <p class="p2">
+                        All API have Swagger documentation in <a href="backend/src/swagger_config.ts" class="link">swagger_config.ts</a> at <br> <pre>api/swagger</pre>.<br> Swagger setups in main.ts:
 <pre>
 export async function app() {
 	const app = await NestFactory.create(AppModule);
