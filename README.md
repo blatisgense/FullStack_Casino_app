@@ -286,6 +286,8 @@ export async function app() {
 	});
 }
 </pre>
+<img src="docs_media/swagger1.jpg" alt="swagger img">
+<img src="docs_media/swagger2.jpg" alt="swagger img">
                 </div>            
             </div>
         </div>
