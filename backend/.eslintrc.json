@@ -14,7 +14,7 @@
   "env": {
     "node": true
   },
-  "ignorePatterns": [".eslintrc.js"],
+  "ignorePatterns": [".eslintrc.json"],
   "rules": {
     //typescript-eslint
     "@typescript-eslint/interface-name-prefix": "off",

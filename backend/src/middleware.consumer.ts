@@ -1,4 +1,4 @@
-import { auth_middle } from "./middleware/auth_midle";
+import { auth_middle } from "./middleware/auth_middle";
 import { role_check } from "./middleware/role_check";
 import { APIS } from "./config/API";
 import { RequestMethod } from "@nestjs/common";
