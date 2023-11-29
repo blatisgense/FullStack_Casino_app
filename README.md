@@ -275,7 +275,7 @@ export class AppModule implements NestModule {
                 <h4 class="h4" id="backend_swagger">Swagger</h4>
                 <div>
                     <p class="p2">
-                        All API have Swagger documentation in <a href="backend/src/swagger_config.ts" class="link">swagger_config.ts</a> at <br> <pre>api/swagger</pre>.<br> Swagger setups in main.ts:
+                        All API have Swagger documentation in <a href="backend/src/swagger_config.ts" class="link">swagger_config.ts</a> at<pre>api/swagger</pre>Swagger setups in main.ts:
 <pre>
 export async function app() {
 	const app = await NestFactory.create(AppModule);
