@@ -160,32 +160,32 @@ const poolConfig: object = process.env.DB_CONNECTION_STRING
                     </p>
                     <p class="p2">Controllers code looks like:</p>
 <pre>
-//NestJs decorators
+<b>//NestJs decorators</b>
 import { Controller, Req, Res } from "@nestjs/common";
-//NestJs decorator for Request method
+<b>//NestJs decorator for Request method</b>
 import { Patch } from "@nestjs/common";
-//the aforementioned API-hint object
+<b>//the aforementioned API-hint object</b>
 import { APIS } from "../config/API";
-//Express types
+<b>//Express types</b>
 import { Request, Response } from "express";
 
-//services
+<b>//services</b>
 import { users_change_money } from "../services/admin/users/change/money";
 
-//define controller
+<b>//define controller</b>
 @Controller()
 export class Admin_Controller {
-    //Request method takes url
+    <b>//Request method takes url</b>
     @Patch(APIS.admin.users.change.money.apiUrl)
-    //call service
+    <b>//call service</b>
     async Users_change_money(@Req() req: Request, @Res() res: Response) {
         await users_change_money(req, res);
     }
-    //below other services
+    <b>//below other services</b>
 }
 </pre>
                 <p class="p2">Then controllers imported to <a href="backend/src/app.module.ts" class="link">app.module.ts</a></p>
-                <pre>
+<pre>
 @Module({
     controllers: [
         Client_Controller,
@@ -193,7 +193,7 @@ export class Admin_Controller {
         Auth_Controller
     ],
 })
-                </pre>
+</pre>
                 </div>
                 <h4 class="h4" id="backend_services">Services</h4>
                 <div>
@@ -201,31 +201,31 @@ export class Admin_Controller {
                         Service is a function that takes Request and Response. After processing the request, sends the Response data (status code, json, set cookies). <br> Example (service return User by email, received as path parameter):
                     </p>
 <pre>
-// pool object for DB query
+<b>// pool object for DB query</b>
 import { pool } from "../../../../database/db";
-//Express types
+<b>//Express types</b>
 import { Request, Response } from "express";
 
-//export service
+<b>//export service</b>
 export const users_get_one = async (req: Request, res: Response) => {
-    //try|catch to catch internal server errors
+    <b>//try|catch to catch internal server errors</b>
     try {
-        //get user with email equal received in parameters 
+        <b>//get user with email equal received in parameters</b>
         const users = await pool.query(
             `SELECT * FROM Users WHERE user_email = $1`,
             [req.params.email],
         );
-        //send error if query fails
+        <b>//send error if query fails</b>
         if (users.error) {
             return res.status(401).json({ error: users.error });
         }
-        //send error if zero users found
+        <b>//send error if zero users found</b>
         if (users.rows.length === 0) {
             return res.status(401).json({
                 error: `User not found, check entered email.`,
             });
         }
-        //send user
+        <b>//send user</b>
         return res.status(200).json(users.rows[0]);
     } catch (error) {
     return res.status(500).json({ error: error.message });
@@ -240,12 +240,12 @@ export const users_get_one = async (req: Request, res: Response) => {
                     <p class="p2"><a href="backend/src/middleware/role_check.ts" class="link">role_check.ts</a>: Checking User's role at <a href="backend/src/controllers/admin_Controller.ts" class="link">Admin_controller</a></p>
                     <p class="p2">Middleware setting in <a href="backend/src/middleware.consumer.ts" class="link">middleware.consumer.ts</a>, below example for setting <a href="backend/src/middleware/auth_middle.ts" class="link">auth_middle.ts</a> and <a href="backend/src/middleware/role_check.ts" class="link">role_check.ts</a> middlewares:</p>
 <pre>
-//required middlewares
+<b>//required middlewares</b>
 import { auth_middle } from "./middleware/auth_middle";
 import { role_check } from "./middleware/role_check";
-//the aforementioned API-hint object
+<b>//the aforementioned API-hint object</b>
 import { APIS } from "./config/API";
-//NestJs parameter
+<b>//NestJs parameter</b>
 import { RequestMethod } from "@nestjs/common";
 
 export const middlewareConsumer = (consumer) => {
@@ -259,9 +259,9 @@ export const middlewareConsumer = (consumer) => {
 </pre>
                     <p class="p2">Then we import <a href="backend/src/middleware.consumer.ts" class="link">middleware.consumer.ts</a> into <a href="backend/src/app.module.ts" class="link">app.module.ts</a> and configure:</p>
 <pre>
-//NestJs types
+<b>//NestJs types</b>
 import { MiddlewareConsumer, NestModule } from "@nestjs/common";
-//middleware config
+<b>//middleware config</b>
 import { middlewareConsumer } from "./middleware.consumer";
 
 export class AppModule implements NestModule {
